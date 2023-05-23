@@ -1,0 +1,25 @@
+{
+  "name": "mentoryx",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "repository": {
+    "url": "git+https://github.com/chiagger/MENTORYX.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "predeploy": "npm run build",
+   "deploy": "gh-pages -d dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
