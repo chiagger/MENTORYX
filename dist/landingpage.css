@@ -1,15 +1,121 @@
-html, body {
-    height: 100%;
-    width: 100%;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Nunito:wght@300&display=swap');
 
-.container {
+  .container {
+    height:100vh;
+    text-align: center;
+    font-family: 'Inter';
+  }
+
+  .innercontainer {
+    flex:1;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header {
+    display: flex;
+    padding: 2rem;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .header .left div {
+    font-size: 1.5em;
+    font-family: 'Nunito'
+  }
+
+  .header .center ul {
+    list-style: none;
+    display: flex;
+    gap:2em;
+  }
+
+  .landingpage {
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .landingpage .left {
     display: flex;
     flex-direction: column;
-    align-content: space-between;
-}
+    gap:3rem;
+    padding-left: 2rem;
+  }
 
-#landingheader {
+  .landingpage .left .top {
     display: flex;
-    justify-content: space-between;
-}
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .landingpage .left .top .logo {
+    font-size: 4em;
+    font-family: 'Nunito';
+  }
+
+  .landingpage .left .bottom {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    gap: 0.5em;
+  }
+
+  img {
+    max-width: 420px;
+    margin-right: 4rem;
+    height: auto;
+  }
+
+  .landingpage .left .bottom button {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-align: center;
+    vertical-align: top;
+    background-color: rgb(15, 98, 254);
+    font-size: 16px;
+    letter-spacing: 0.16px;
+    min-height: 48px;
+    line-height: 1.29;
+    color: #fff;
+    font-weight: 400;
+    transition: background 70ms cubic-bezier(0,0,.38,.9),box-shadow 70ms cubic-bezier(0,0,.38,.9),border-color 70ms cubic-bezier(0,0,.38,.9),outline 70ms cubic-bezier(0,0,.38,.9);
+  }
+
+  .landingpage .left .bottom button:hover {
+    background-color: rgb(12, 79, 204);
+    transition: background 70ms cubic-bezier(0,0,.38,.9),box-shadow 70ms cubic-bezier(0,0,.38,.9),border-color 70ms cubic-bezier(0,0,.38,.9),outline 70ms cubic-bezier(0,0,.38,.9);
+  }
+
+  #login {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #0f62fe;
+    text-align: left;
+    vertical-align: top;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: #00000000;
+    font-size: 14px;
+    letter-spacing: 0.16px;
+    min-height: 48px;
+    line-height: 1.29;
+    color: #0f62fe;
+    font-weight: 400;
+    transition: background 70ms cubic-bezier(0,0,.38,.9),box-shadow 70ms cubic-bezier(0,0,.38,.9),border-color 70ms cubic-bezier(0,0,.38,.9),outline 70ms cubic-bezier(0,0,.38,.9);
+  }
+
+  #login:hover {
+    background-color: rgb(15, 98, 254);
+    color: white;
+    border-color: rgb(195, 243, 252);
+    transition: background 70ms cubic-bezier(0,0,.38,.9),box-shadow 70ms cubic-bezier(0,0,.38,.9),border-color 70ms cubic-bezier(0,0,.38,.9),outline 70ms cubic-bezier(0,0,.38,.9);
+  }
