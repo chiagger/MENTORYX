@@ -97,10 +97,10 @@ import '../normalize.css';
   container.appendChild(innerContainer());
   document.body.appendChild(container);
 
-  const loginBtn = document.getElementById("login");
-  loginBtn.addEventListener("click", handleLogin);
+  const signupBtn = document.getElementById("signup");
+  signupBtn.addEventListener("click", handleLogin);
 
   function handleLogin() {
-    window.location.href = 'auth.html';
+    window.location.href = 'registration.html';
   }
 

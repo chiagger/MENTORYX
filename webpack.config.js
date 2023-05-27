@@ -7,7 +7,7 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: {
     index: './src/landingpage/index.js',
-    auth: './src/auth/auth.js',
+    registration: './src/registration/registration.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -16,9 +16,9 @@ module.exports = {
       chunks: ['index'],
     }),
     new HtmlWebpackPlugin({  
-      filename: 'auth.html',
+      filename: 'registration.html',
       title: 'Log in',
-      chunks: ['auth'], //chunks select the js file to include in the script
+      chunks: ['registration'], //chunks select the js file to include in the script
     })
   ],
   output: {

@@ -1,4 +1,4 @@
-import './auth.css';
+import './registration.css';
 import '../normalize.css';
 
 var loginBox = document.createElement('div');
