@@ -93,7 +93,14 @@ import '../normalize.css';
     return landingpage;
   }
 
-
   container.appendChild(header());
   container.appendChild(innerContainer());
   document.body.appendChild(container);
+
+  const loginBtn = document.getElementById("login");
+  loginBtn.addEventListener("click", handleLogin);
+
+  function handleLogin() {
+    window.location.href = 'auth.html';
+  }
+
