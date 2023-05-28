@@ -98,9 +98,16 @@ import '../normalize.css';
   document.body.appendChild(container);
 
   const signupBtn = document.getElementById("signup");
-  signupBtn.addEventListener("click", handleLogin);
+  signupBtn.addEventListener("click", handleSignup);
 
-  function handleLogin() {
+  function handleSignup() {
     window.location.href = 'registration.html';
   }
 
+
+const loginBtn = document.getElementById("login");
+loginBtn.addEventListener("click", handleLogin);
+
+function handleLogin() {
+  window.location.href = 'auth.html';
+}

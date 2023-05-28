@@ -8,6 +8,7 @@ module.exports = {
   entry: {
     index: './src/landingpage/index.js',
     registration: './src/registration/registration.js',
+    auth: './src/auth/auth.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -17,8 +18,13 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({  
       filename: 'registration.html',
-      title: 'Log in',
+      title: 'Sign up',
       chunks: ['registration'], //chunks select the js file to include in the script
+    }),
+    new HtmlWebpackPlugin({  
+      filename: 'auth.html',
+      title: 'Log in',
+      chunks: ['auth'], 
     })
   ],
   output: {
