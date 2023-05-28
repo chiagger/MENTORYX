@@ -55,6 +55,20 @@ const lastNameLabel = document.createElement('label');
 lastNameLabel.textContent = 'LAST NAME';
 lastNameDiv.appendChild(lastNameLabel);
 
+const usernameDiv = document.createElement('div');
+usernameDiv.classList.add('user-box');
+form.appendChild(usernameDiv);
+
+const usernameInput = document.createElement('input');
+usernameInput.setAttribute('type', 'text');
+usernameInput.setAttribute('id', 'username');
+usernameInput.setAttribute('required', '');
+usernameDiv.appendChild(usernameInput);
+
+const usernameLabel = document.createElement('label');
+usernameLabel.textContent = 'USERNAME';
+usernameDiv.appendChild(usernameLabel);
+
 // Create the email input field
 const emailDiv = document.createElement('div');
 emailDiv.classList.add('user-box');
