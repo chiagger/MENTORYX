@@ -1,20 +1,8 @@
-//connect to supabase
-/*import { createClient } from '@supabase/supabase-js'
-
-const supabaseUrl = process.env.SUPABASE_URL
-const supabaseKey = process.env.ANON_KEY
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-*/
-
-// Import the functions you need from the SDKs you need
+//connect to firebase
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth, createUserWithEmailAndPassword, getUser } from "firebase/auth";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDCsiGY0sSr5YON_EIZTzxoyqgY-g2vkN4",
   authDomain: "mentoryx-66f50.firebaseapp.com",
@@ -26,11 +14,13 @@ const firebaseConfig = {
   measurementId: "G-S9172JNVCH"
 };
 
-// Initialize Firebase
+//Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const auth = getAuth(app);
 
 import {getDatabase, set, get, update, remove, ref, child} from 'firebase/database';
+
 
 //redirect from Login to Signup page
 const loginLink = document.getElementById("loginLink");
@@ -47,56 +37,66 @@ form.addEventListener('submit', function(e) {
     var password = document.getElementById('password').value;
     var confirmPassword = document.getElementById('confirmPassword').value;
   
-    // Verifica la lunghezza della password
     if (password.length < 8) {
       alert('La password deve essere di almeno otto caratteri.');
       return;
     }
   
-    // Verifica la presenza di una lettera maiuscola
     if (!/[A-Z]/.test(password)) {
       alert('La password deve contenere almeno una lettera maiuscola.');
       return;
     }
   
-    // Verifica la presenza di almeno un carattere speciale
     if (!/[!@#$%^&*]/.test(password)) {
       alert('La password deve contenere almeno un carattere speciale (!, @, #, $, %, ^, &, *).');
       return;
     }
   
-    // Verifica la presenza di almeno una cifra
     if (!/\d/.test(password)) {
       alert('La password deve contenere almeno un a cifra.');
       return;
     }
-  
-    // Verifica che le password corrispondano
+    
     if (password === confirmPassword) {
         signUp();
-      // Puoi aggiungere qui il codice per inviare i dati del modulo al server
     } else {
       alert('Le password non corrispondono. Riprova.');
     }
   });
-  
 
-//firebase signup 
+// SIGNING UP
 function signUp() {
-    const db= getDatabase();
-
     var password = document.getElementById('password').value;
     var email = document.getElementById('email').value;
-    var name =document.getElementById('firstName').value;;
-    var surname =document.getElementById('lastName').value;;
-    var username =document.getElementById('username').value;;
     
-    set(ref(db, "Users/"), {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((res) => {
+        //now create an object in realtime db with the additional values
+        var uid = auth.currentUser.uid;
+        registerUser(uid);
+        })
+        .catch((error) => {
+            alert(error);
+        })
+}
+
+
+
+function registerUser(uid) {
+    const db= getDatabase();
+        var name =document.getElementById('firstName').value;
+        var surname =document.getElementById('lastName').value;
+        var password = document.getElementById('password').value;
+        var email = document.getElementById('email').value;
+        var category = document.querySelector('.category').lastChild;
+        var categoryText = category.options[category.selectedIndex].text;
+
+    set(ref(db, "Users/" + uid), {
         Name: name,
         Surname: surname,
-        Username: username,
         Email: email,
         Password: password,
+        Category: categoryText,
     })
     .then(() => {
         alert("User registered to db");
@@ -105,5 +105,3 @@ function signUp() {
         alert(error);
     })
 }
-
-  

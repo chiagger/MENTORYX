@@ -22,9 +22,13 @@ loginBox.appendChild(heading);
 const form = document.createElement('form');
 loginBox.appendChild(form);
 
+const fullNameDiv = document.createElement('div');
+fullNameDiv.classList.add('fullName');
+
+
 const firstNameDiv = document.createElement('div');
 firstNameDiv.classList.add('user-box');
-form.appendChild(firstNameDiv);
+fullNameDiv.appendChild(firstNameDiv);
 
 const firstNameInput = document.createElement('input');
 firstNameInput.setAttribute('type', 'text');
@@ -38,7 +42,7 @@ firstNameDiv.appendChild(firstNameLabel);
 
 const lastNameDiv = document.createElement('div');
 lastNameDiv.classList.add('user-box');
-form.appendChild(lastNameDiv);
+fullNameDiv.appendChild(lastNameDiv);
 
 const lastNameInput = document.createElement('input');
 lastNameInput.setAttribute('type', 'text');
@@ -49,20 +53,7 @@ lastNameDiv.appendChild(lastNameInput);
 const lastNameLabel = document.createElement('label');
 lastNameLabel.textContent = 'LAST NAME';
 lastNameDiv.appendChild(lastNameLabel);
-
-const usernameDiv = document.createElement('div');
-usernameDiv.classList.add('user-box');
-form.appendChild(usernameDiv);
-
-const usernameInput = document.createElement('input');
-usernameInput.setAttribute('type', 'text');
-usernameInput.setAttribute('id', 'username');
-usernameInput.setAttribute('required', '');
-usernameDiv.appendChild(usernameInput);
-
-const usernameLabel = document.createElement('label');
-usernameLabel.textContent = 'USERNAME';
-usernameDiv.appendChild(usernameLabel);
+form.appendChild(fullNameDiv);
 
 const emailDiv = document.createElement('div');
 emailDiv.classList.add('user-box');
@@ -77,6 +68,40 @@ emailDiv.appendChild(emailInput);
 const emailLabel = document.createElement('label');
 emailLabel.textContent = 'E-MAIL';
 emailDiv.appendChild(emailLabel);
+
+var divCategory = document.createElement("div");
+divCategory.classList.add('user-box');
+divCategory.classList.add('category');
+divCategory.classList.add('flex-container');
+
+var labelCategory = document.createElement("label");
+labelCategory.textContent = "CATEGORY:";
+labelCategory.classList.add('label-left');
+
+var selectElement = document.createElement("select");
+selectElement.setAttribute('id', 'select');
+selectElement.setAttribute('required', '');
+selectElement.classList.add('select-right');
+
+var defaultOption = document.createElement("option");
+defaultOption.textContent = ""; // Set the default blank value
+defaultOption.disabled = true; // Make the default option disabled
+defaultOption.selected = true; // Set the default option as selected
+
+var option1 = document.createElement("option");
+option1.textContent = "Studente";
+
+var option2 = document.createElement("option");
+option2.textContent = "Ascoltatore";
+
+selectElement.appendChild(defaultOption);
+selectElement.appendChild(option1);
+selectElement.appendChild(option2);
+
+divCategory.appendChild(labelCategory);
+divCategory.appendChild(selectElement);
+
+form.appendChild(divCategory);
 
 const passwordDiv = document.createElement('div');
 passwordDiv.classList.add('user-box');
