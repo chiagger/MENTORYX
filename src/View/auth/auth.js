@@ -23,6 +23,7 @@ const form = document.createElement('form');
 const usernameBox = document.createElement('div');
 usernameBox.classList.add('user-box');
 const usernameInput = document.createElement('input');
+usernameInput.setAttribute('id','email');
 usernameInput.type = 'text';
 usernameInput.name = '';
 usernameInput.required = true;
@@ -34,6 +35,7 @@ usernameBox.appendChild(usernameLabel);
 const passwordBox = document.createElement('div');
 passwordBox.classList.add('user-box');
 const passwordInput = document.createElement('input');
+passwordInput.setAttribute('id', 'password');
 passwordInput.type = 'password';
 passwordInput.name = '';
 passwordInput.required = true;
@@ -42,7 +44,7 @@ passwordLabel.textContent = 'PASSWORD';
 passwordBox.appendChild(passwordInput);
 passwordBox.appendChild(passwordLabel);
 
-const submitButton = document.createElement('a');
+const submitButton = document.createElement('button');
 submitButton.setAttribute('id', 'loginSubmit');
 submitButton.setAttribute('type', 'submit');
 for (let i = 0; i < 4; i++) {
