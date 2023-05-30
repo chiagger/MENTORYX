@@ -17,6 +17,8 @@ module.exports = {
     auth: './src/View/auth/auth.js',
     registrationPresenter: './src/Presenter/AuthenticationPresenter/UserRegistrationPresenter.js',
     authenticationPresenter: './src/Presenter/AuthenticationPresenter/UserAuthenticationPresenter.js',
+    homeStudente: './src/View/homeStudente/homeStudente.js',
+    homeAscoltatore: './src/View/homeAscoltatore/homeAscoltatore.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -33,6 +35,16 @@ module.exports = {
       filename: 'auth.html',
       title: 'Log in',
       chunks: ['auth', 'authenticationPresenter'], 
+    }),
+    new HtmlWebpackPlugin({  
+      filename: 'homeStudente.html',
+      title: 'Home',
+      chunks: ['homeStudente'], 
+    }),
+    new HtmlWebpackPlugin({  
+      filename: 'homeAscoltatore.html',
+      title: 'Home',
+      chunks: ['homeAscoltatore'], 
     })
   ],
   output: {

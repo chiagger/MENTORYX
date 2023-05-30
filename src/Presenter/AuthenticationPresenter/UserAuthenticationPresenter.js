@@ -1,7 +1,8 @@
 import { getAuth, signInWithEmailAndPassword, getUser } from "firebase/auth";
-import { getDatabase, set, get, update, remove, ref, child } from 'firebase/database';
+import { getDatabase, set, get, update, remove, ref, child, orderByChild, equalTo, query, once } from 'firebase/database';
 import { app } from '../firebaseConfig.js';
 const auth = getAuth(app);
+const db = getDatabase();
 
 
 //redirect from Login to Signup page
@@ -19,16 +20,17 @@ form.addEventListener('submit', function (e) {
 });
 
 
+//LOG IN
 function userLogin() {
-
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
 
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
-      const user = userCredential.user;
-      console.log(user);
+      const uid = userCredential.user.uid;
+      //REDIRECT TO STUDENT OR LISTENER HOME PAGE
+      redirectHome(uid);
     })
     .catch((error) => {
       alert("Error: " + error.message);
@@ -36,3 +38,22 @@ function userLogin() {
       const errorMessage = error.message;
     });
 }
+
+//redirect to the right home page according to category
+function redirectHome(uid) {
+  const myUserData = ref(db);
+  get(child(myUserData, "Users/" + uid))
+  .then((snapshot) => {
+    if (snapshot.exists()) {
+      if (snapshot.val().Category == "Studente") {
+        window.location.href = 'homeStudente.html';
+      }else if (snapshot.val().Category == "Ascoltatore") {
+        window.location.href = 'homeAscoltatore.html';
+    } else {
+      alert("User data not found");
+    }
+    } 
+  })
+  .catch((error) => {alert(error)})
+}
+

@@ -79,7 +79,8 @@ function registerUser(uid) {
         Category: categoryText,
     })
     .then(() => {
-        alert("User registered to db");
+        alert("Sign up successful!");
+        window.location.href="auth.html";
     })
     .catch((error) => {
         alert(error);
