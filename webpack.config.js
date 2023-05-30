@@ -6,9 +6,11 @@ module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
   entry: {
-    index: './src/landingpage/index.js',
-    registration: './src/registration/registration.js',
-    auth: './src/auth/auth.js',
+    index: './src/View/landingpage/index.js',
+    registration: './src/View/registration/registration.js',
+    auth: './src/View/auth/auth.js',
+    registrationPresenter: './src/Presenter/AuthenticationPresenter/UserRegistrationPresenter.js',
+    authenticationPresenter: './src/Presenter/AuthenticationPresenter/UserAuthenticationPresenter.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -19,12 +21,12 @@ module.exports = {
     new HtmlWebpackPlugin({  
       filename: 'registration.html',
       title: 'Sign up',
-      chunks: ['registration'], //chunks select the js file to include in the script
+      chunks: ['registration', 'registrationPresenter'],
     }),
     new HtmlWebpackPlugin({  
       filename: 'auth.html',
       title: 'Log in',
-      chunks: ['auth'], 
+      chunks: ['auth', 'authenticationPresenter'], 
     })
   ],
   output: {
