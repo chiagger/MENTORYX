@@ -1,15 +1,17 @@
 //connect to Database
-import { createClient } from '@supabase/supabase-js'
+/*import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = 'https://ewwkqzzfvrbtdxxokiwq.supabase.co'
 const supabaseKey = process.env.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV3d2txenpmdnJidGR4eG9raXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODU0MDUxODIsImV4cCI6MjAwMDk4MTE4Mn0.asTnokwBRRWWPCtOOgA-r5AOwQCHKdcH7NbR6Kv5dPs;
 const supabase = createClient(supabaseUrl, supabaseKey);
-
+*/
 
 //redirect from Login to Signup page
 const loginLink = document.getElementById("loginLink");
+console.log(loginLink);
 loginLink.addEventListener("click", handleLogin);
 function handleLogin() {
+    console.log("ok");
   window.location.href = 'auth.html';
 }
 
@@ -55,7 +57,8 @@ form.addEventListener('submit', function(e) {
   });
   
 
-//supabase signup
+//supabase signup 
+/*
 const signUp = async () => {
     var password = document.getElementById('password').value;
     var email = document.getElementById('email').value;
@@ -84,6 +87,6 @@ const signUp = async () => {
     } catch (e) {
         console.log(e.message);
     }
-};
+};*/
 
   

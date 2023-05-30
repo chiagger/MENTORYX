@@ -5,6 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
+  devServer: {
+    static: './dist',
+  },
+  optimization: {
+    runtimeChunk: 'single',
+  },
   entry: {
     index: './src/View/landingpage/index.js',
     registration: './src/View/registration/registration.js',
