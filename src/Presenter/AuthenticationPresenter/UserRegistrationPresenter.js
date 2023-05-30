@@ -1,17 +1,41 @@
 //connect to supabase
-import { createClient } from '@supabase/supabase-js'
+/*import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = 'https://ewwkqzzfvrbtdxxokiwq.supabase.co'
-const supabaseKey = process.env.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV3d2txenpmdnJidGR4eG9raXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODU0MDUxODIsImV4cCI6MjAwMDk4MTE4Mn0.asTnokwBRRWWPCtOOgA-r5AOwQCHKdcH7NbR6Kv5dPs
+const supabaseUrl = process.env.SUPABASE_URL
+const supabaseKey = process.env.ANON_KEY
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+*/
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDCsiGY0sSr5YON_EIZTzxoyqgY-g2vkN4",
+  authDomain: "mentoryx-66f50.firebaseapp.com",
+  databaseURL: "https://mentoryx-66f50-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "mentoryx-66f50",
+  storageBucket: "mentoryx-66f50.appspot.com",
+  messagingSenderId: "517335617852",
+  appId: "1:517335617852:web:2a38fceec7d095694c4e39",
+  measurementId: "G-S9172JNVCH"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+import {getDatabase, set, get, update, remove, ref, child} from 'firebase/database';
 
 //redirect from Login to Signup page
 const loginLink = document.getElementById("loginLink");
-console.log(loginLink);
 loginLink.addEventListener("click", handleLogin);
 function handleLogin() {
-    console.log("ok");
   window.location.href = 'auth.html';
 }
 
@@ -57,36 +81,29 @@ form.addEventListener('submit', function(e) {
   });
   
 
-//supabase signup 
-/*
-const signUp = async () => {
+//firebase signup 
+function signUp() {
+    const db= getDatabase();
+
     var password = document.getElementById('password').value;
     var email = document.getElementById('email').value;
     var name =document.getElementById('firstName').value;;
     var surname =document.getElementById('lastName').value;;
     var username =document.getElementById('username').value;;
     
-
-
-    try {
-        const { error } = await supabase.auth.signUp(
-            {
-                email: email,
-                password: password,
-            },
-            {
-                data: {
-                    first_name : name,
-                    last_name : surname,
-                    username: username,
-                }
-            }
-        );
-
-        if (error) throw error;
-    } catch (e) {
-        console.log(e.message);
-    }
-};*/
+    set(ref(db, "Users/"), {
+        Name: name,
+        Surname: surname,
+        Username: username,
+        Email: email,
+        Password: password,
+    })
+    .then(() => {
+        alert("User registered to db");
+    })
+    .catch((error) => {
+        alert(error);
+    })
+}
 
   
