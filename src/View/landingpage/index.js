@@ -1,8 +1,6 @@
 import './landingpage.css';
 import '../normalize.css';
 
-import landingimg from '../../../dist/img/landingpage.jpg';
-
 //dynamically created DOM
   const container = document.createElement('div');
   container.classList.add("container");
@@ -86,7 +84,7 @@ import landingimg from '../../../dist/img/landingpage.jpg';
     left.appendChild(bottom);
 
     const img = document.createElement('img');
-    img.src = landingimg;
+    img.src = "https://images.unsplash.com/photo-1593698054469-2bb6fdf4b512?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80";
 
     right.appendChild(img);
 

@@ -7,7 +7,7 @@ html {
 
   body {
     background: #ffffff9f;
-  background: url(img/login.jpg) no-repeat center center fixed;
+  background: url("https://burst.shopifycdn.com/photos/row-of-young-adults-at-work.jpg?width=925&format=pjpg&exif=1&iptc=1") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

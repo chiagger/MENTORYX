@@ -64,14 +64,16 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
+        use:  ['file-loader?name=img/[name].[ext]']
+        /*[
+         {
             loader: 'url-loader',
             options: {
               limit: 8192,
             },
           },
-        ],
+        ],*/
+        
       },
       {
         test: /\.(png|jpe?g|gif)$/i,

@@ -28,7 +28,7 @@ usernameInput.type = 'text';
 usernameInput.name = '';
 usernameInput.required = true;
 const usernameLabel = document.createElement('label');
-usernameLabel.textContent = 'USERNAME OR EMAIL';
+usernameLabel.textContent = 'EMAIL';
 usernameBox.appendChild(usernameInput);
 usernameBox.appendChild(usernameLabel);
 

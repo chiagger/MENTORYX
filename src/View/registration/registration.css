@@ -12,7 +12,7 @@ body {
   padding: 0;
   font-family: 'Inter';
   background: #ffffff9f;
-  background: url(img/notes.jpg) no-repeat center center fixed;
+  background: url("https://burst.shopifycdn.com/photos/writing-down-notes.jpg?width=925&format=pjpg&exif=1&iptc=1") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
