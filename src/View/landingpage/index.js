@@ -1,6 +1,8 @@
 import './landingpage.css';
 import '../normalize.css';
 
+import landingimg from '../../../dist/img/landingpage.jpg';
+
 //dynamically created DOM
   const container = document.createElement('div');
   container.classList.add("container");
@@ -84,7 +86,7 @@ import '../normalize.css';
     left.appendChild(bottom);
 
     const img = document.createElement('img');
-    img.src = "../src/View/landingpage/img/landingpage.jpg";
+    img.src = landingimg;
 
     right.appendChild(img);
 
