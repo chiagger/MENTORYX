@@ -1,9 +1,3 @@
-const head = document.querySelector("head");
-const cssLink = document.createElement('link');
-cssLink.rel = 'stylesheet';
-cssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
-head.appendChild(cssLink);
-
 // Mostra o nasconde il dropdown del profilo
 document.getElementById("profile-icon").addEventListener("click", function () {
     const profileDropdown = document.getElementById("profile-dropdown");

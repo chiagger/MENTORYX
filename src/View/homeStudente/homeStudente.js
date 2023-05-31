@@ -1,5 +1,11 @@
 import "./homeStudente.css";
 
+const head = document.querySelector("head");
+const cssLink = document.createElement('link');
+cssLink.rel = 'stylesheet';
+cssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
+head.appendChild(cssLink);
+
 
 // Create header element
 const header = document.createElement('header');
