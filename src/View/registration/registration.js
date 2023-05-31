@@ -10,12 +10,13 @@ const heading = document.createElement('h2');
 heading.classList.add("heading");
 
 const text = document.createElement('h2');
+text.classList.add("text");
 text.textContent = 'Sign up to';
 heading.appendChild(text);
 
-const headingLogo = document.createElement('h2');
-headingLogo.classList.add("logo");
-headingLogo.textContent = 'MENTORYX';
+const headingLogo = document.createElement('img');
+headingLogo.src = "https://i.imgur.com/UTazMbC.png";
+headingLogo.setAttribute('id', 'headinglogo');
 heading.appendChild(headingLogo);
 loginBox.appendChild(heading);
 

@@ -17,8 +17,9 @@ import '../normalize.css';
     right.classList.add("right");
 
     
-    const title = document.createElement('div');
-    title.innerHTML = "MENTORYX";
+    const title = document.createElement('img');
+    title.src = "https://i.imgur.com/UTazMbC.png";
+    title.setAttribute('id', 'headinglogo');
     left.appendChild(title);
 
     const ul = document.createElement('ul');
@@ -63,9 +64,9 @@ import '../normalize.css';
     const phrase1 = document.createElement('div');
     phrase1.classList.add("phrase");
     phrase1.innerHTML = "Unlock your potential with";
-    const logo = document.createElement('div');
-    logo.classList.add("logo");
-    logo.innerHTML = "MENTORYX";
+    const logo = document.createElement('img');
+    logo.src = "https://i.imgur.com/UTazMbC.png";
+    logo.setAttribute('id', 'logo');
 
     top.appendChild(phrase1);
     top.appendChild(logo);

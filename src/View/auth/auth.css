@@ -143,3 +143,15 @@ html {
     font-family: 'Nunito';
   }
   
+  #headinglogo {
+    height: 70px;
+    width: auto;
+  }
+  
+  .heading .text {
+    font-family: 'Nunito';
+    font-weight: 300;
+    margin-top: 28px;
+    margin-right: -15px;
+  }
+  
