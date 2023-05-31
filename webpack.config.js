@@ -19,6 +19,7 @@ module.exports = {
     authenticationPresenter: './src/Presenter/AuthenticationPresenter/UserAuthenticationPresenter.js',
     homeStudente: './src/View/homeStudente/homeStudente.js',
     homeAscoltatore: './src/View/homeAscoltatore/homeAscoltatore.js',
+    studentEventsPresenter: './src/Presenter/EventsPresenter/studentEventsPresenter.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -26,25 +27,25 @@ module.exports = {
       filename: 'index.html',
       chunks: ['index'],
     }),
-    new HtmlWebpackPlugin({  
+    new HtmlWebpackPlugin({
       filename: 'registration.html',
       title: 'Sign up',
       chunks: ['registration', 'registrationPresenter'],
     }),
-    new HtmlWebpackPlugin({  
+    new HtmlWebpackPlugin({
       filename: 'auth.html',
       title: 'Log in',
-      chunks: ['auth', 'authenticationPresenter'], 
+      chunks: ['auth', 'authenticationPresenter'],
     }),
-    new HtmlWebpackPlugin({  
+    new HtmlWebpackPlugin({
       filename: 'homeStudente.html',
       title: 'Home',
-      chunks: ['homeStudente'], 
+      chunks: ['homeStudente', 'studentEventsPresenter'],
     }),
-    new HtmlWebpackPlugin({  
+    new HtmlWebpackPlugin({
       filename: 'homeAscoltatore.html',
       title: 'Home',
-      chunks: ['homeAscoltatore'], 
+      chunks: ['homeAscoltatore'],
     })
   ],
   output: {
@@ -64,7 +65,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/i,
-        use:  ['file-loader?name=img/[name].[ext]']
+        use: ['file-loader?name=img/[name].[ext]']
         /*[
          {
             loader: 'url-loader',
@@ -73,7 +74,7 @@ module.exports = {
             },
           },
         ],*/
-        
+
       },
       {
         test: /\.(png|jpe?g|gif)$/i,

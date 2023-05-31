@@ -1,0 +1,172 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    background-color: #f0f0f0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    width: 150px;
+}
+
+#navigation {
+    position: relative;
+}
+
+#navigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#navigation ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#navigation ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+}
+
+#navigation ul li:hover ul {
+    display: block;
+}
+
+#navigation ul ul {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: #f0f0f0;
+    display: none;
+}
+
+#navigation ul ul li {
+    display: block;
+    width: 200px;
+}
+
+#navigation ul ul li a {
+    padding: 8px 10px;
+}
+
+#profile-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+#profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    display: none;
+}
+
+#profile-dropdown a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    padding: 5px;
+}
+
+#profile-dropdown a:hover {
+    background-color: #ddd;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 100px;
+}
+
+#image-container {
+    flex: 1;
+    margin-right: 50px;
+    text-align: center;
+    position: relative;
+}
+
+#main-image {
+    width: 400px;
+    border-radius: 50%;
+    animation: slideDown 1s ease-out;
+    transition: transform 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+#main-image:hover {
+    transform: scale(1.1);
+}
+
+#description {
+    flex: 1;
+    text-align: center;
+}
+
+#description h1 {
+    font-size: 36px;
+}
+
+#description p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#search-form {
+    display: flex;
+    align-items: center;
+}
+
+#search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 300px;
+}
+
+#search-form button {
+    background-color: #3366cc;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#search-form button:hover {
+    background-color: #225599;
+}
