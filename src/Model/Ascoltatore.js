@@ -2,9 +2,10 @@ import User from './User.js';
 
 
 export default class Studente extends User {
-    constructor(firstName, lastName, email, metodiPagamento = []) {
+    constructor(firstName, lastName, email, metodiPagamento = [], titoliStudioList = [], materieCompetenzaList = []) {
         super(firstName, lastName, email, metodiPagamento);
-        this._titoliStudioList = [];
+        this._titoliStudioList = titoliStudioList;
+        this._materieCompetenzaList = materieCompetenzaList;
     }
 
     get titoliStudioList() {
@@ -13,5 +14,13 @@ export default class Studente extends User {
 
     set titoliStudioList(titoloStudio) {
         this._titoliStudioList.push(titoloStudio);
+    }
+
+    get _materieCompetenzaList() {
+        return this._materieCompetenzaList;
+    }
+
+    set _materieCompetenzaList(materia) {
+        this._materieCompetenzaList.push(materia);
     }
 }
