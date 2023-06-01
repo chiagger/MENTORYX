@@ -36,9 +36,10 @@ export default class User {
     return this.metodiPagamento;
   }
 
+  setMetodiPagamento(metodoPagamento) {
+    this.metodiPagamento.push(metodoPagamento);
+  }
+
 
 }
 
-User.prototype.setMetodiPagamento = function (metodoPagamento) {
-  this.metodoPagamento = metodoPagamento;
-};
