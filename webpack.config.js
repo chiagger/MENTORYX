@@ -24,7 +24,8 @@ module.exports = {
     inserisciTitoloAscoltatore: './src/View/registration/inserisciTitoloAscoltatore.js',
     inserisciMetodoPagamentoPresenter: './src/Presenter/AuthenticationPresenter/inserisciMetodoPagamentoPresenter.js',
     inserisciTitoloAscoltatorePresenter: './src/Presenter/AuthenticationPresenter/inserisciTitoloAscoltatorePresenter.js',
-
+    TitoloStudio: './src/Model/TitoloStudio.js',
+    MetodoPagamento: './src/Model/MetodoPagamento.js',
   },
   plugins: [
     new HtmlWebpackPlugin({

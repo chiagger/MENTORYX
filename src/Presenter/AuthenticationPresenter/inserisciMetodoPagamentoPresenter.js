@@ -5,6 +5,7 @@ import { app } from '../firebaseConfig.js';
 const auth = getAuth(app);
 const db = getDatabase();
 
+import MetodoPagamento from '../../Model/MetodoPagamento.js';
 
 
 //FAKING credit card insertion
@@ -68,15 +69,20 @@ const creditCardForm = document.getElementById('creditCardForm');
 creditCardForm.addEventListener('submit', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
+    var cardholder = document.getElementById("cardHolder").value;
     var number = document.getElementById("cardNumber").value;
     var expiryDate = document.getElementById("expiryDate").value;
     var CVV = document.getElementById("cvv").value;
     var uid = auth.currentUser.uid;
 
+
+    let metodoPagamento;
+    metodoPagamento = new MetodoPagamento(cardholder, number, expiryDate, CVV);
+    const metodoPagamentoJSON = JSON.stringify(metodoPagamento);
+
+
     update(ref(db, "Users/" + uid), {
-        CardNumber: number,
-        CardExpiryDate: expiryDate,
-        CardCVV: CVV
+        MetodoPagamento: metodoPagamentoJSON,
     })
         .then(() => {
             redirectUserRegistration(uid);

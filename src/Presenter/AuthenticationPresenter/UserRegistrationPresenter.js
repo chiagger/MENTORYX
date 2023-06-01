@@ -66,7 +66,6 @@ function registerUser(uid) {
   const db = getDatabase();
   var name = document.getElementById('firstName').value;
   var surname = document.getElementById('lastName').value;
-  var password = document.getElementById('password').value;
   var email = document.getElementById('email').value;
   var category = document.querySelector('.category').lastChild;
   var categoryText = category.options[category.selectedIndex].text;
@@ -75,7 +74,6 @@ function registerUser(uid) {
     Name: name,
     Surname: surname,
     Email: email,
-    Password: password,
     Category: categoryText,
   })
     .then(() => {

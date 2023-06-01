@@ -25,7 +25,6 @@ loginBox.appendChild(form);
 
 const nomeTitoloDiv = document.createElement('div');
 nomeTitoloDiv.classList.add('user-box');
-form.appendChild(nomeTitoloDiv);
 
 const nomeTitoloInput = document.createElement('input');
 nomeTitoloInput.setAttribute('type', 'text');
@@ -37,6 +36,34 @@ const nomeTitoloLabel = document.createElement('label');
 nomeTitoloLabel.textContent = 'TIPO DI TITOLO (DIPLOMA, LAUREA...)';
 nomeTitoloDiv.appendChild(nomeTitoloLabel);
 form.appendChild(nomeTitoloDiv);
+
+const ambitoTitoloDiv = document.createElement('div');
+ambitoTitoloDiv.classList.add('user-box');
+
+const ambitoTitoloInput = document.createElement('input');
+ambitoTitoloInput.setAttribute('type', 'text');
+ambitoTitoloInput.setAttribute('id', 'ambitoTitolo');
+ambitoTitoloInput.setAttribute('required', '');
+ambitoTitoloDiv.appendChild(ambitoTitoloInput);
+
+const ambitoTitoloLabel = document.createElement('label');
+ambitoTitoloLabel.textContent = 'AMBITO (TIPO DI LICEO, FACOLTÀ...)';
+ambitoTitoloDiv.appendChild(ambitoTitoloLabel);
+form.appendChild(ambitoTitoloDiv);
+
+const pressoDiv = document.createElement('div');
+pressoDiv.classList.add('user-box');
+
+const pressoInput = document.createElement('input');
+pressoInput.setAttribute('type', 'text');
+pressoInput.setAttribute('id', 'presso');
+pressoInput.setAttribute('required', '');
+pressoDiv.appendChild(pressoInput);
+
+const pressoLabel = document.createElement('label');
+pressoLabel.textContent = 'PRESSO (SCUOLA, UNIVERSITÀ...)';
+pressoDiv.appendChild(pressoLabel);
+form.appendChild(pressoDiv);
 
 const dataConseguimentoDiv = document.createElement('div');
 dataConseguimentoDiv.classList.add('user-box');
@@ -51,23 +78,6 @@ dataConseguimentoDiv.appendChild(dataConseguimentoInput);
 const dataConseguimentoLabel = document.createElement('label');
 dataConseguimentoLabel.textContent = 'DATA DI CONSEGUIMENTO';
 dataConseguimentoDiv.appendChild(dataConseguimentoLabel);
-
-
-const fileUploadDiv = document.createElement('div');
-fileUploadDiv.classList.add('file-upload');
-form.appendChild(fileUploadDiv);
-
-const fileInput = document.createElement('input');
-fileInput.setAttribute('type', 'file');
-fileInput.setAttribute('id', 'fileUpload');
-fileInput.setAttribute('required', '');
-
-
-const fileLabel = document.createElement('label');
-fileLabel.classList.add("textLabel");
-fileLabel.textContent = 'Carica il tuo file PDF:';
-fileUploadDiv.appendChild(fileLabel);
-fileUploadDiv.appendChild(fileInput);
 
 // Create the submit button
 const submitButton = document.createElement('input');

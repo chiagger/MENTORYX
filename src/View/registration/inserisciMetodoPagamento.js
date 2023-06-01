@@ -24,6 +24,21 @@ const form = document.createElement('form');
 form.setAttribute('id', 'creditCardForm');
 loginBox.appendChild(form);
 
+
+const cardholderDiv = document.createElement('div');
+cardholderDiv.classList.add('user-box');
+form.appendChild(cardholderDiv);
+
+const cardholderInput = document.createElement('input');
+cardholderInput.setAttribute('type', 'text');
+cardholderInput.setAttribute('id', 'cardHolder');
+cardholderInput.setAttribute('required', '');
+cardholderDiv.appendChild(cardholderInput);
+
+const cardholderLabel = document.createElement('label');
+cardholderLabel.textContent = 'Card Holder Name';
+cardholderDiv.appendChild(cardholderLabel);
+
 const cardNumberDiv = document.createElement('div');
 cardNumberDiv.classList.add('user-box');
 form.appendChild(cardNumberDiv);
