@@ -35,24 +35,22 @@ profileDropdown.id = 'profile-dropdown';
 
 // Create anchor elements with icons
 const chatLink = document.createElement('a');
+chatLink.setAttribute('id', 'chatLink');
 chatLink.href = '#';
 chatLink.innerHTML = '<i class="fas fa-comments"></i> Chat';
 
-const profileLink = document.createElement('a');
-profileLink.href = '#';
-profileLink.innerHTML = '<i class="fas fa-user"></i> Profilo';
-
 const settingsLink = document.createElement('a');
+settingsLink.setAttribute('id', 'settingsLink');
 settingsLink.href = '#';
 settingsLink.innerHTML = '<i class="fas fa-cog"></i> Impostazioni';
 
 const logoutLink = document.createElement('a');
+logoutLink.setAttribute('id', 'logoutLink');
 logoutLink.href = '#';
 logoutLink.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
 
 // Append anchor elements to the profile dropdown
 profileDropdown.appendChild(chatLink);
-profileDropdown.appendChild(profileLink);
 profileDropdown.appendChild(settingsLink);
 profileDropdown.appendChild(logoutLink);
 

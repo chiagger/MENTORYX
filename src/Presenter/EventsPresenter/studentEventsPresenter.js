@@ -1,3 +1,9 @@
+//connect to firebase
+import { getAuth, signOut, getUser } from "firebase/auth";
+import { getDatabase, set, get, update, remove, ref, child } from 'firebase/database';
+import { app } from '../firebaseConfig.js';
+const auth = getAuth(app);
+
 // Mostra o nasconde il dropdown del profilo
 document.getElementById("profile-icon").addEventListener("click", function () {
     const profileDropdown = document.getElementById("profile-dropdown");
@@ -28,4 +34,12 @@ window.addEventListener("mousemove", function (e) {
 });
 
 
-
+//logout functionality
+const logoutLink = document.getElementById('logoutLink');
+logoutLink.addEventListener("click", () => {
+    signOut(auth).then(() => {
+        window.location.href = "index.html";
+    }).catch((error) => {
+        alert(error);
+    })
+});

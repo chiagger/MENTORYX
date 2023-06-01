@@ -20,6 +20,11 @@ module.exports = {
     homeStudente: './src/View/homeStudente/homeStudente.js',
     homeAscoltatore: './src/View/homeAscoltatore/homeAscoltatore.js',
     studentEventsPresenter: './src/Presenter/EventsPresenter/studentEventsPresenter.js',
+    inserisciMetodoPagamento: './src/View/registration/inserisciMetodoPagamento.js',
+    inserisciTitoloAscoltatore: './src/View/registration/inserisciTitoloAscoltatore.js',
+    inserisciMetodoPagamentoPresenter: './src/Presenter/AuthenticationPresenter/inserisciMetodoPagamentoPresenter.js',
+    inserisciTitoloAscoltatorePresenter: './src/Presenter/AuthenticationPresenter/inserisciTitoloAscoltatorePresenter.js',
+
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -46,7 +51,17 @@ module.exports = {
       filename: 'homeAscoltatore.html',
       title: 'Home',
       chunks: ['homeAscoltatore'],
-    })
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'viewInserisciMetodoPagamento.html',
+      title: 'Sign Up',
+      chunks: ['inserisciMetodoPagamento', 'inserisciMetodoPagamentoPresenter'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'viewInserisciTitoloAscoltatore.html',
+      title: 'Sign Up',
+      chunks: ['inserisciTitoloAscoltatore', 'inserisciTitoloAscoltatorePresenter'],
+    }),
   ],
   output: {
     filename: '[name].bundle.js',

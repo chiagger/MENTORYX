@@ -121,23 +121,27 @@ body {
 #search-input {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 1px;
     margin-right: 10px;
     width: 300px;
 }
 
+#search-input:focus {
+    outline-color: #0353e9;
+}
+
 #search-form button {
-    background-color: #3366cc;
+    background-color: #0353e9;
     color: white;
     padding: 10px;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    border-radius: 1px;
     transition: background-color 0.3s ease-in-out;
 }
 
 #search-form button:hover {
-    background-color: #225599;
+    background-color: #0139a1;
 }
 
 #logobig {
