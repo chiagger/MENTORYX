@@ -6,6 +6,9 @@ const auth = getAuth(app);
 const db = getDatabase();
 
 import MetodoPagamento from '../../Model/MetodoPagamento.js';
+import { User, setMetodiPagamento } from '../../Model/User.js';
+import { Studente } from '../../Model/Studente.js';
+import { Ascoltatore } from '../../Model/Ascoltatore.js';
 
 
 //FAKING credit card insertion
@@ -66,7 +69,7 @@ window.onload = function (e) {
 
 //Inserting payment method info to firebase
 const creditCardForm = document.getElementById('creditCardForm');
-creditCardForm.addEventListener('submit', function (e) {
+creditCardForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     var cardholder = document.getElementById("cardHolder").value;
@@ -78,18 +81,34 @@ creditCardForm.addEventListener('submit', function (e) {
 
     let metodoPagamento;
     metodoPagamento = new MetodoPagamento(cardholder, number, expiryDate, CVV);
-    const metodoPagamentoJSON = JSON.stringify(metodoPagamento);
+    const utente = await getUtenteObject(uid);
+    const category = await getUserCategory(uid);
+    utente.setMetodiPagamento = metodoPagamento; //SYNTAX FOR SETTERS!
+    const utenteJSON = JSON.stringify(utente);
+
+    if (category === "Studente") {
+        update(ref(db, "Users/" + uid), {
+            Studente: utenteJSON,
+        })
+            .then(() => {
+                redirectUserRegistration(uid);
+            })
+            .catch((error) => {
+                alert(error);
+            })
+    } else {
+        update(ref(db, "Users/" + uid), {
+            Ascoltatore: utenteJSON,
+        })
+            .then(() => {
+                redirectUserRegistration(uid);
+            })
+            .catch((error) => {
+                alert(error);
+            })
+    }
 
 
-    update(ref(db, "Users/" + uid), {
-        MetodoPagamento: metodoPagamentoJSON,
-    })
-        .then(() => {
-            redirectUserRegistration(uid);
-        })
-        .catch((error) => {
-            alert(error);
-        })
 
 });
 
@@ -99,14 +118,47 @@ function redirectUserRegistration(uid) {
     get(child(myUserData, "Users/" + uid))
         .then((snapshot) => {
             if (snapshot.exists()) {
-                if (snapshot.val().Category == "Studente") {
+                const snapshotValue = snapshot.val();
+                const childKeys = Object.keys(snapshotValue);
+                const category = childKeys[0];
+
+                if (category === "Studente") {
                     window.location.href = 'auth.html';
-                } else if (snapshot.val().Category == "Ascoltatore") {
-                    window.location.href = 'viewInserisciTitoloAscoltatore.html';
                 } else {
-                    alert("User data not found");
+                    window.location.href = 'viewInserisciTitoloAscoltatore.html';
                 }
             }
         })
         .catch((error) => { alert(error) })
+}
+
+
+function getUtenteObject(uid) {
+    const myUserData = ref(db);
+    return get(child(myUserData, "Users/" + uid))
+        .then((snapshot) => {
+            const snapshotValue = snapshot.val();
+            const firstChildValue = Object.values(snapshotValue)[0];
+            const utente = JSON.parse(firstChildValue);
+            return utente;
+        })
+        .catch((error) => {
+            alert(error);
+            throw error; // Propagate the error further
+        });
+}
+
+function getUserCategory(uid) {
+    const myUserData = ref(db);
+    return get(child(myUserData, "Users/" + uid))
+        .then((snapshot) => {
+            const snapshotValue = snapshot.val();
+            const childKeys = Object.keys(snapshotValue);
+            const category = childKeys[0];
+            return category;
+        })
+        .catch((error) => {
+            alert(error);
+            throw error; // Propagate the error further
+        });
 }

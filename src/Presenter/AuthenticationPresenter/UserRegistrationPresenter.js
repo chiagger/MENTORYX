@@ -4,6 +4,9 @@ import { getDatabase, set, get, update, remove, ref, child } from 'firebase/data
 import { app } from '../firebaseConfig.js';
 const auth = getAuth(app);
 
+import Studente from '../../Model/Studente.js';
+import Ascoltatore from '../../Model/Ascoltatore.js';
+
 //redirect from Login to Signup page
 const loginLink = document.getElementById("loginLink");
 loginLink.addEventListener("click", handleLogin);
@@ -53,7 +56,6 @@ function signUp() {
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((res) => {
-      //now create an object in realtime db with the additional values
       var uid = auth.currentUser.uid;
       registerUser(uid);
     })
@@ -63,6 +65,7 @@ function signUp() {
 }
 
 function registerUser(uid) {
+  console.log("OK");
   const db = getDatabase();
   var name = document.getElementById('firstName').value;
   var surname = document.getElementById('lastName').value;
@@ -70,17 +73,34 @@ function registerUser(uid) {
   var category = document.querySelector('.category').lastChild;
   var categoryText = category.options[category.selectedIndex].text;
 
-  set(ref(db, "Users/" + uid), {
-    Name: name,
-    Surname: surname,
-    Email: email,
-    Category: categoryText,
-  })
-    .then(() => {
-      window.location.href = "viewInserisciMetodoPagamento.html";
+  var utente;
+  if (categoryText === "Studente") {
+    utente = new Studente(name, surname, email);
+    const utenteJSON = JSON.stringify(utente);
+    set(ref(db, "Users/" + uid), {
+      Studente: utenteJSON,
     })
-    .catch((error) => {
-      alert(error);
+      .then(() => {
+        window.location.href = "viewInserisciMetodoPagamento.html";
+      })
+      .catch((error) => {
+        alert(error);
+      })
+  } else {
+    utente = new Ascoltatore(name, surname, email);
+    const utenteJSON = JSON.stringify(utente);
+    set(ref(db, "Users/" + uid), {
+      Ascoltatore: utenteJSON,
     })
+      .then(() => {
+        window.location.href = "viewInserisciMetodoPagamento.html";
+      })
+      .catch((error) => {
+        alert(error);
+      })
+  }
+
+
+
 }
 

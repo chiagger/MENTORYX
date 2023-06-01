@@ -6,6 +6,8 @@ const auth = getAuth(app);
 const db = getDatabase();
 
 import TitoloStudio from '../../Model/TitoloStudio.js';
+import Studente from '../../Model/Studente.js';
+import { Ascoltatore, setTitoliStudioList } from '../../Model/Ascoltatore.js';
 
 //valida data di conseguimento
 function validateDataConseguimento() {
@@ -24,29 +26,69 @@ function validateDataConseguimento() {
     }
 }
 
-function saveTitoloToDatabase() {
+async function saveTitoloToDatabase() {
     var nome = document.getElementById("nomeTitolo").value;
     var ambito = document.getElementById("ambitoTitolo").value;
     var presso = document.getElementById("presso").value;
     var dataConseguimento = document.getElementById("dataConseguimento").value;
+    var uid = auth.currentUser.uid;
+
 
     let titoloStudio;
     titoloStudio = new TitoloStudio(nome, ambito, presso, dataConseguimento);
-    const customTitoloJSON = JSON.stringify(titoloStudio);
 
-    var uid = auth.currentUser.uid;
+    const utente = await getUtenteObject(uid);
+    const category = await getUserCategory(uid);
+    utente.setTitoliStudioList = titoloStudio; //SYNTAX FOR SETTERS!
+    const utenteJSON = JSON.stringify(utente);
 
-    update(ref(db, "Users/" + uid), {
-        TitoloStudio: customTitoloJSON,
-    })
-        .then(() => {
-            window.location.href = "auth.html";
+    if (category === "Studente") {
+        alert("C'è stato un errore di categoria.");
+    } else {
+        update(ref(db, "Users/" + uid), {
+            Ascoltatore: utenteJSON,
+        })
+            .then(() => {
+                window.location.href = "auth.html";
+            })
+            .catch((error) => {
+                alert(error);
+            })
+    }
+}
+
+
+
+
+function getUtenteObject(uid) {
+    const myUserData = ref(db);
+    return get(child(myUserData, "Users/" + uid))
+        .then((snapshot) => {
+            const snapshotValue = snapshot.val();
+            const firstChildValue = Object.values(snapshotValue)[0];
+            const utente = JSON.parse(firstChildValue);
+            return utente;
         })
         .catch((error) => {
             alert(error);
-        })
+            throw error; // Propagate the error further
+        });
 }
 
+function getUserCategory(uid) {
+    const myUserData = ref(db);
+    return get(child(myUserData, "Users/" + uid))
+        .then((snapshot) => {
+            const snapshotValue = snapshot.val();
+            const childKeys = Object.keys(snapshotValue);
+            const category = childKeys[0];
+            return category;
+        })
+        .catch((error) => {
+            alert(error);
+            throw error; // Propagate the error further
+        });
+}
 
 //Inserting titolo di studio info to firebase
 const creditCardForm = document.getElementById('creditCardForm');

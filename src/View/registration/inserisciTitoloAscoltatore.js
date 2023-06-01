@@ -79,6 +79,11 @@ const dataConseguimentoLabel = document.createElement('label');
 dataConseguimentoLabel.textContent = 'DATA DI CONSEGUIMENTO';
 dataConseguimentoDiv.appendChild(dataConseguimentoLabel);
 
+const assistenzaDiv = document.createElement('div');
+assistenzaDiv.innerHTML = "Se vuoi aggiungere un altro titolo di studio, contatta l'assistenza dalle impostazioni.";
+assistenzaDiv.classList.add("assistenza");
+loginBox.appendChild(assistenzaDiv);
+
 // Create the submit button
 const submitButton = document.createElement('input');
 submitButton.setAttribute('type', 'submit');
