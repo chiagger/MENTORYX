@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Nunito:wght@300&display=swap');
+
+
+body {
+    font-family: 'Inter';
+    margin: 0;
+    padding: 0;
+    background-size: 200% 200%;
+    animation: gradientAnimation 10s ease infinite;
+    overflow: hidden;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    animation: fadeInAnimation 1s ease;
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #0044c2;
+    border-radius: 4px;
+}
+
+#password-indicator {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+#password-indicator span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+#password-indicator span.valid {
+    background-color: #00e713;
+}
+
+#password-indicator span.invalid {
+    background-color: #d9534f;
+}
+
+input:focus {
+    outline-color: #0353e9;
+}
+
+.button {
+    display: inline-block;
+    background-color: #0353e9;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    float: right;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0044c2;
+}
+
+#error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.input-group input {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    box-sizing: border-box;
+    /* Add this line */
+}

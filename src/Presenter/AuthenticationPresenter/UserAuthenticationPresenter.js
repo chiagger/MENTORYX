@@ -42,18 +42,46 @@ function userLogin() {
 //redirect to the right home page according to category
 function redirectHome(uid) {
   const myUserData = ref(db);
-  get(child(myUserData, "Users/" + uid))
-  .then((snapshot) => {
-    if (snapshot.exists()) {
-      if (snapshot.val().Category == "Studente") {
-        window.location.href = 'homeStudente.html';
-      }else if (snapshot.val().Category == "Ascoltatore") {
-        window.location.href = 'homeAscoltatore.html';
-    } else {
-      alert("User data not found");
-    }
-    } 
-  })
-  .catch((error) => {alert(error)})
+  const user = getUtenteObject(uid);
+  const category = getUserCategory(uid);
+
+  if (category === "Studente") {
+    window.location.href = 'homeStudente.html';
+  } else {
+    window.location.href = 'homeAscoltatore.html';
+
+  }
+}
+
+
+
+function getUserCategory(uid) {
+  const myUserData = ref(db);
+  return get(child(myUserData, "Users/" + uid))
+    .then((snapshot) => {
+      const snapshotValue = snapshot.val();
+      const childKeys = Object.keys(snapshotValue);
+      const category = childKeys[0];
+      return category;
+    })
+    .catch((error) => {
+      alert(error);
+      throw error; // Propagate the error further
+    });
+}
+
+function getUtenteObject(uid) {
+  const myUserData = ref(db);
+  return get(child(myUserData, "Users/" + uid))
+    .then((snapshot) => {
+      const snapshotValue = snapshot.val();
+      const firstChildValue = Object.values(snapshotValue)[0];
+      const utente = JSON.parse(firstChildValue);
+      return utente;
+    })
+    .catch((error) => {
+      alert(error);
+      throw error; // Propagate the error further
+    });
 }
 

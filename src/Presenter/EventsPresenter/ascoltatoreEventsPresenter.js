@@ -1,4 +1,3 @@
-//connect to firebase
 import { getAuth, signOut, getUser } from "firebase/auth";
 import { getDatabase, set, get, update, remove, ref, child } from 'firebase/database';
 import { app } from '../firebaseConfig.js';

@@ -26,6 +26,9 @@ module.exports = {
     inserisciTitoloAscoltatorePresenter: './src/Presenter/AuthenticationPresenter/inserisciTitoloAscoltatorePresenter.js',
     TitoloStudio: './src/Model/TitoloStudio.js',
     MetodoPagamento: './src/Model/MetodoPagamento.js',
+    ascoltatoreEventsPresenter: './src/Presenter/EventsPresenter/ascoltatoreEventsPresenter.js',
+    impostazioni: './src/View/impostazioni/impostazioni.js',
+    impostazioniPresenter: '/src/Presenter/EventsPresenter/impostazioniEventsPresenter',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -51,7 +54,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'homeAscoltatore.html',
       title: 'Home',
-      chunks: ['homeAscoltatore'],
+      chunks: ['homeAscoltatore', 'ascoltatoreEventsPresenter'],
     }),
     new HtmlWebpackPlugin({
       filename: 'viewInserisciMetodoPagamento.html',
@@ -62,6 +65,11 @@ module.exports = {
       filename: 'viewInserisciTitoloAscoltatore.html',
       title: 'Sign Up',
       chunks: ['inserisciTitoloAscoltatore', 'inserisciTitoloAscoltatorePresenter'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'impostazioni.html',
+      title: 'Settings',
+      chunks: ['impostazioni', 'impostazioniPresenter'],
     }),
   ],
   output: {
