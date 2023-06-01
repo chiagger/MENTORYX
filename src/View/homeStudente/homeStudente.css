@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Nunito:wght@300&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter';
     margin: 0;
     padding: 0;
 }
 
 #header {
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     padding: 20px;
     display: flex;
     justify-content: space-between;
@@ -13,49 +15,11 @@ body {
 }
 
 #logo {
-    width: 150px;
+    width: 200px;
 }
 
 #navigation {
     position: relative;
-}
-
-#navigation ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-#navigation ul li {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-#navigation ul li a {
-    text-decoration: none;
-    color: #333;
-    padding: 10px;
-}
-
-#navigation ul li:hover ul {
-    display: block;
-}
-
-#navigation ul ul {
-    position: absolute;
-    top: 40px;
-    left: 0;
-    background-color: #f0f0f0;
-    display: none;
-}
-
-#navigation ul ul li {
-    display: block;
-    width: 200px;
-}
-
-#navigation ul ul li a {
-    padding: 8px 10px;
 }
 
 #profile-icon {
@@ -66,20 +30,19 @@ body {
 }
 
 #profile-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-left: 10px;
+    height: 30px;
+    width: auto;
+    margin-right: 20px;
 }
 
 #profile-dropdown {
     position: absolute;
+    width: 130px;
     top: 100%;
     right: 0;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
     display: none;
 }
 
@@ -91,7 +54,7 @@ body {
 }
 
 #profile-dropdown a:hover {
-    background-color: #ddd;
+    background-color: #ececec;
 }
 
 #content {
@@ -104,14 +67,15 @@ body {
 
 #image-container {
     flex: 1;
+    max-width: 500px;
     margin-right: 50px;
     text-align: center;
     position: relative;
 }
 
 #main-image {
-    width: 400px;
-    border-radius: 50%;
+    max-width: 400px;
+    border-radius: 1%;
     animation: slideDown 1s ease-out;
     transition: transform 0.3s ease-in-out;
 }
@@ -131,17 +95,22 @@ body {
 }
 
 #description {
+    max-width: 500px;
     flex: 1;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #description h1 {
     font-size: 36px;
+    font-weight: 200;
 }
 
 #description p {
+    margin-top: 10px;
     font-size: 18px;
-    margin-bottom: 20px;
 }
 
 #search-form {
@@ -169,4 +138,10 @@ body {
 
 #search-form button:hover {
     background-color: #225599;
+}
+
+#logobig {
+    height: 120px;
+    width: auto;
+    margin-top: -30px;
 }

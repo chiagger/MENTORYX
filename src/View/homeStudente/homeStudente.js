@@ -14,32 +14,11 @@ header.id = 'header';
 // Create logo element
 const logo = document.createElement('img');
 logo.id = 'logo';
-logo.src = 'https://i.postimg.cc/0jh350ZD/Immagine-Whats-App-2023-05-31-ore-19-37-36.jpg';
+logo.src = 'https://i.imgur.com/UTazMbC.png';
 
 // Create navigation element
 const navigation = document.createElement('nav');
 navigation.id = 'navigation';
-
-// Create unordered list element
-const ul = document.createElement('ul');
-
-// Create list items and anchor elements
-const homeLink = document.createElement('li');
-homeLink.innerHTML = '<a href="#">Home</a>';
-
-const chiSiamoLink = document.createElement('li');
-chiSiamoLink.innerHTML = '<a href="#">Chi Siamo</a>';
-
-const contattiLink = document.createElement('li');
-contattiLink.innerHTML = '<a href="#">Contatti</a>';
-
-// Append list items to the unordered list
-ul.appendChild(homeLink);
-ul.appendChild(chiSiamoLink);
-ul.appendChild(contattiLink);
-
-// Append the unordered list to the navigation element
-navigation.appendChild(ul);
 
 // Create profile icon element
 const profileIcon = document.createElement('div');
@@ -48,8 +27,7 @@ profileIcon.id = 'profile-icon';
 // Create profile image element
 const profileImage = document.createElement('img');
 profileImage.id = 'profile-image';
-profileImage.src = 'https://i.postimg.cc/mgYqRM91/7407996-icona-utente-icona-persona-client-simbolo-login-testa-segno-icona-design-vettoriale.jpg';
-profileImage.alt = 'Immagine Profilo';
+profileImage.src = 'https://img.icons8.com/?size=512&id=8xJVtjb4kB9s&format=png';
 
 // Create profile dropdown element
 const profileDropdown = document.createElement('div');
@@ -98,7 +76,7 @@ imageContainer.id = 'image-container';
 // Create main image element
 const mainImage = document.createElement('img');
 mainImage.id = 'main-image';
-mainImage.src = 'https://i.postimg.cc/XYknv087/istockphoto-539246041-612x612.jpg';
+mainImage.src = 'https://images.pexels.com/photos/6325977/pexels-photo-6325977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
 mainImage.alt = 'Immagine Principale';
 
 // Append main image to the image container
@@ -110,11 +88,17 @@ description.id = 'description';
 
 // Create h1 element
 const heading = document.createElement('h1');
-heading.textContent = 'Benvenuto nel nostro sito';
+heading.textContent = 'Benvenuto su ';
+
+const logobig = document.createElement('img');
+logobig.setAttribute('id', 'logobig');
+logobig.src = "https://i.imgur.com/UTazMbC.png";
+heading.appendChild(logobig);
 
 // Create paragraph element
 const paragraph = document.createElement('p');
-paragraph.textContent = "La nostra accademia offre lezioni di alta qualità per studenti di tutte le età. Siamo orgogliosi dei nostri istruttori altamente qualificati e delle nostre strutture all'avanguardia. Prenota una lezione oggi stesso e inizia il tuo percorso di apprendimento con noi.";
+paragraph.textContent = "Trasforma il tuo percorso di studio facilitando il tuo apprendimento! "
+    + "Connettiti con ascoltatori competenti cercandoli nella barra di ricerca qua sotto: ";
 
 // Create form element
 const form = document.createElement('form');
@@ -124,7 +108,7 @@ form.id = 'search-form';
 const input = document.createElement('input');
 input.type = 'text';
 input.id = 'search-input';
-input.placeholder = 'Cerca...';
+input.placeholder = 'Cerca per materia...';
 
 // Create submit button
 const button = document.createElement('button');
