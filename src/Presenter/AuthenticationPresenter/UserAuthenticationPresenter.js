@@ -60,7 +60,7 @@ function isAdmin(user) {
 async function redirectHome(user) {
   const uid = user.uid;
   if (isAdmin(user) === true) {
-    window.location.href = "impostazioni.html"; //cambia homeAdmin.html
+    window.location.href = "homeAdmin.html"; //cambia homeAdmin.html
   } else {
     const category = await getUserCategory(uid);
 

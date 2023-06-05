@@ -28,7 +28,9 @@ module.exports = {
     MetodoPagamento: './src/Model/MetodoPagamento.js',
     ascoltatoreEventsPresenter: './src/Presenter/EventsPresenter/ascoltatoreEventsPresenter.js',
     impostazioni: './src/View/impostazioni/impostazioni.js',
-    impostazioniPresenter: '/src/Presenter/EventsPresenter/impostazioniEventsPresenter',
+    impostazioniPresenter: './src/Presenter/EventsPresenter/impostazioniEventsPresenter',
+    homeAdmin: './src/View/homeAdmin/homeAdmin.js',
+    adminEventsPresenter: './src/Presenter/EventsPresenter/adminEventsPresenter.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -70,6 +72,11 @@ module.exports = {
       filename: 'impostazioni.html',
       title: 'Settings',
       chunks: ['impostazioni', 'impostazioniPresenter'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'homeAdmin.html',
+      title: 'Settings',
+      chunks: ['homeAdmin', 'adminEventsPresenter'],
     }),
   ],
   output: {
