@@ -28,9 +28,9 @@ function userLogin() {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
-      const uid = userCredential.user.uid;
+      const user = userCredential.user;
       //REDIRECT TO STUDENT OR LISTENER HOME PAGE
-      redirectHome(uid);
+      redirectHome(user);
     })
     .catch((error) => {
       alert("Error: " + error.message);
@@ -39,18 +39,30 @@ function userLogin() {
     });
 }
 
-//redirect to the right home page according to category
-function redirectHome(uid) {
-  const myUserData = ref(db);
-  const user = getUtenteObject(uid);
-  const category = getUserCategory(uid);
-
-  if (category === "Studente") {
-    window.location.href = 'homeStudente.html';
+function isAdmin(user) {
+  if (user.email === "busca.chiara.cb@gmail.com") { //aggiungere qua eventuali altri admin... come encryptarlo???
+    return true;
   } else {
-    window.location.href = 'homeAscoltatore.html';
-
+    return false;
   }
+}
+
+//redirect to the right home page according to category
+async function redirectHome(user) {
+  const uid = user.uid;
+  if (isAdmin(user) === true) {
+    window.location.href = "impostazioni.html"; //cambia homeAdmin.html
+  } else {
+    const category = await getUserCategory(uid);
+
+    if (category === "Studente") {
+      window.location.href = 'homeStudente.html';
+    } else if (category === "Ascoltatore") {
+      window.location.href = 'homeAscoltatore.html';
+
+    }
+  }
+
 }
 
 

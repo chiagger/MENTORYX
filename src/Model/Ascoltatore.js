@@ -16,11 +16,11 @@ export default class Studente extends User {
         this._titoliStudioList.push(titoloStudio);
     }
 
-    get _materieCompetenzaList() {
+    get materieCompetenzaList() {
         return this._materieCompetenzaList;
     }
 
-    set _materieCompetenzaList(materia) {
+    set materieCompetenzaList(materia) {
         this._materieCompetenzaList.push(materia);
     }
 }

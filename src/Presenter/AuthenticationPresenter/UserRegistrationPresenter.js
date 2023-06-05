@@ -65,7 +65,6 @@ function signUp() {
 }
 
 function registerUser(uid) {
-  console.log("OK");
   const db = getDatabase();
   var name = document.getElementById('firstName').value;
   var surname = document.getElementById('lastName').value;
@@ -87,7 +86,9 @@ function registerUser(uid) {
         alert(error);
       })
   } else {
+    console.log("shown");
     utente = new Ascoltatore(name, surname, email);
+    console.log("not shown");
     const utenteJSON = JSON.stringify(utente);
     set(ref(db, "Users/" + uid), {
       Ascoltatore: utenteJSON,
@@ -99,8 +100,5 @@ function registerUser(uid) {
         alert(error);
       })
   }
-
-
-
 }
 
