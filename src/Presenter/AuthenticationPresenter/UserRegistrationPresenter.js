@@ -7,6 +7,11 @@ const auth = getAuth(app);
 import Studente from '../../Model/Studente.js';
 import Ascoltatore from '../../Model/Ascoltatore.js';
 
+import { log } from '../LogPresenter/logPresenter.js';
+import { readRecordList, addRecord } from '../../Model/ModelLog/Log';
+import Record from '../../Model/ModelLog/Record.js';
+
+
 //redirect from Login to Signup page
 const loginLink = document.getElementById("loginLink");
 loginLink.addEventListener("click", handleLogin);
@@ -57,6 +62,10 @@ function signUp() {
   createUserWithEmailAndPassword(auth, email, password)
     .then((res) => {
       var uid = auth.currentUser.uid;
+      const desc = auth.currentUser.email + " signed up";
+      var record = new Record(new Date(), "Accesso", desc);
+      log.addRecord(record);
+      //console.log(log.readRecordList("Accesso"));
       registerUser(uid);
     })
     .catch((error) => {
@@ -86,9 +95,7 @@ function registerUser(uid) {
         alert(error);
       })
   } else {
-    console.log("shown");
     utente = new Ascoltatore(name, surname, email);
-    console.log("not shown");
     const utenteJSON = JSON.stringify(utente);
     set(ref(db, "Users/" + uid), {
       Ascoltatore: utenteJSON,

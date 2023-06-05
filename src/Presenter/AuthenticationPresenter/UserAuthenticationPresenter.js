@@ -35,7 +35,7 @@ function userLogin() {
       const user = userCredential.user;
       const desc = user.email + " logged in";
 
-      var record = new Record(1, new Date(), "Accesso", desc);
+      var record = new Record(new Date(), "Accesso", desc);
       log.addRecord(record);
       //console.log(log.readRecordList("Accesso"));
       //REDIRECT TO STUDENT OR LISTENER HOME PAGE

@@ -1,6 +1,5 @@
 export default class Record {
-    constructor(id, timestamp, tipo, descrizione) {
-        this.id = id;
+    constructor(timestamp, tipo, descrizione) {
         this.timestamp = timestamp;
         if (tipo === "Evento" || tipo === "Accesso") {
             this.tipo = tipo;
@@ -16,10 +15,6 @@ export default class Record {
 
     setDescrizione(value) {
         this.descrizione = value;
-    }
-
-    getId() {
-        return this.id;
     }
 
     getTimestamp() {
