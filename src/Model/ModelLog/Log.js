@@ -1,3 +1,5 @@
+import Record from './Record.js';
+
 export default class Log {
     constructor() {
         this.recordList = [];

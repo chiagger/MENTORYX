@@ -4,6 +4,10 @@ import { app } from '../firebaseConfig.js';
 const auth = getAuth(app);
 const db = getDatabase();
 
+import { log } from '../LogPresenter/logPresenter.js';
+import { readRecordList, addRecord } from '../../Model/ModelLog/Log';
+import Record from '../../Model/ModelLog/Record.js';
+
 
 //redirect from Login to Signup page
 const signupLink = document.getElementById("signupLink");
@@ -29,6 +33,11 @@ function userLogin() {
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
+      const desc = user.email + " logged in";
+
+      var record = new Record(1, new Date(), "Accesso", desc);
+      log.addRecord(record);
+      //console.log(log.readRecordList("Accesso"));
       //REDIRECT TO STUDENT OR LISTENER HOME PAGE
       redirectHome(user);
     })

@@ -1,5 +1,5 @@
 export default class Record {
-    constructor(id, timestamp, tipo) {
+    constructor(id, timestamp, tipo, descrizione) {
         this.id = id;
         this.timestamp = timestamp;
         if (tipo === "Evento" || tipo === "Accesso") {
@@ -7,6 +7,15 @@ export default class Record {
         } else {
             throw new Error("Invalid tipo value. It must be 'Evento' or 'Accesso'.");
         }
+        this.descrizione = descrizione;
+    }
+
+    getDescrizione() {
+        return this.descrizione;
+    }
+
+    setDescrizione(value) {
+        this.descrizione = value;
     }
 
     getId() {
