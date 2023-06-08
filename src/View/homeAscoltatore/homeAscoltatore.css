@@ -1,4 +1,4 @@
-CSS: @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Nunito:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Nunito:wght@300&display=swap');
 
 body {
     font-family: 'Inter';
@@ -56,6 +56,50 @@ body {
 #profile-dropdown a:hover {
     background-color: #ececec;
 }
+
+/* Styling for the new tabs */
+#tabs-container {
+    display: flex;
+}
+
+.tab {
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+}
+
+.tab:hover {
+    background-color: #f4f4f4;
+}
+
+#empty-container {
+    margin-top: 20px;
+}
+
+/* Styling for the Log Eventi tab */
+#log-eventi {
+    background-color: #ffffff;
+    padding: 20px;
+    display: none;
+}
+
+/* Styling for the Log Accessi tab */
+#log-accessi {
+    background-color: #ffffff;
+    padding: 20px;
+    display: none;
+}
+
+/* Styling for the Assegna Materie tab */
+#assegna-materie {
+    background-color: #ffffff;
+    padding: 20px;
+    display: none;
+}
+
+/* Additional styles for the rest of the page */
 
 #content {
     display: flex;

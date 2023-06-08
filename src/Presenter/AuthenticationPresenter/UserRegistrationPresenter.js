@@ -1,6 +1,5 @@
 //connect to firebase
-import { getAuth, createUserWithEmailAndPassword, getUser } from "firebase/auth";
-import { getDatabase, set, get, update, remove, ref, child } from 'firebase/database';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from '../firebaseConfig.js';
 const auth = getAuth(app);
 

@@ -1,10 +1,13 @@
 import "./homeAdmin.css";
+import log from '../../Model/ModelLog/Log';
+
 
 const head = document.querySelector("head");
 const cssLink = document.createElement('link');
 cssLink.rel = 'stylesheet';
 cssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
 head.appendChild(cssLink);
+
 
 
 // Create header element
@@ -61,6 +64,52 @@ header.appendChild(navigation);
 const emptyContainer = document.createElement('div');
 emptyContainer.id = 'empty-container';
 
-// Append header and empty container to the document body
+// Create tabs container
+const tabsContainer = document.createElement('div');
+tabsContainer.id = 'tabs-container';
+
+// Create Log Eventi tab
+const logEventiTab = document.createElement('div');
+logEventiTab.classList.add('tab');
+logEventiTab.id = 'logEventi';
+logEventiTab.textContent = 'Log Eventi';
+
+// Create Log Accessi tab
+const logAccessiTab = document.createElement('div');
+logAccessiTab.classList.add('tab');
+logAccessiTab.id = 'logAccessi';
+logAccessiTab.textContent = 'Log Accessi';
+
+// Create Assegna Materie tab
+const assegnaMaterieTab = document.createElement('div');
+assegnaMaterieTab.classList.add('tab');
+assegnaMaterieTab.id = "assegnaMaterie"
+assegnaMaterieTab.textContent = 'Assegna Materie';
+
+// Append tabs to the tabs container
+tabsContainer.appendChild(logEventiTab);
+tabsContainer.appendChild(logAccessiTab);
+tabsContainer.appendChild(assegnaMaterieTab);
+
+// Append header, tabs container, and empty container to the document body
 document.body.appendChild(header);
+document.body.appendChild(tabsContainer);
 document.body.appendChild(emptyContainer);
+
+
+console.log(log.readRecordList("Accesso"));
+//view event log
+const logEventiBtn = document.getElementById("logEventi")
+logEventiBtn.addEventListener("click", () => { displayLog("Accesso") });
+
+function displayLog(tipo) {
+    var logList = log.readRecordList(tipo);
+    console.log(logList);
+
+    for (var i = 0; i < logList.length; i++) {
+        var logDOM = document.createElement("div");
+        logDOM.classList.add("log");
+        logDOM.innerHTML = logList.at(i).desc;
+        emptyContainer.appendChild(logDOM);
+    }
+}

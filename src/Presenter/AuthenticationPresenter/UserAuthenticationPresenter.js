@@ -36,7 +36,6 @@ function userLogin() {
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      log.loginLog(user);
       redirectHome(user);
 
     })
@@ -58,6 +57,7 @@ function isAdmin(user) {
 //redirect to the right home page according to category
 async function redirectHome(user) {
   const uid = user.uid;
+  log.loginLog(user);
   if (isAdmin(user) === true) {
     window.location.href = "homeAdmin.html"; //cambia homeAdmin.html
   } else {

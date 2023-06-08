@@ -76,7 +76,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: 'homeAdmin.html',
-      title: 'Settings',
+      title: 'Home',
       chunks: ['homeAdmin', 'adminEventsPresenter'],
     }),
   ],
