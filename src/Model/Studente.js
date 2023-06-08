@@ -2,8 +2,9 @@ import User from './User.js';
 import Abbonamento from './Abbonamento.js';
 
 export default class Studente extends User {
-    constructor(firstName, lastName, email, metodiPagamento = []) {
+    constructor(firstName, lastName, email, metodiPagamento = [], abbonamento) {
         super(firstName, lastName, email, metodiPagamento);
+        this._abbonamento = undefined;
     }
 
     get abbonamento() {

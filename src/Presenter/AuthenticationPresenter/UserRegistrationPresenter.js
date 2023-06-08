@@ -7,6 +7,8 @@ const auth = getAuth(app);
 import Studente from '../../Model/Studente.js';
 import Ascoltatore from '../../Model/Ascoltatore.js';
 
+import LogPresenter from "../LogPresenter/LogPresenter.js";
+const log = new LogPresenter();
 
 
 //redirect from Login to Signup page
@@ -60,7 +62,8 @@ function signUp() {
     .then((res) => {
       var user = auth.currentUser;
       var uid = user.uid;
-      //signUpLog(user);
+      log.signupLog(user);
+      //console.log(log.showAccessLog());
       registerUser(uid);
     })
     .catch((error) => {

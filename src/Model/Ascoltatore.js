@@ -1,4 +1,5 @@
 import User from './User.js';
+import Pagamento from './Pagamento.js';
 
 
 export default class Studente extends User {
@@ -9,18 +10,18 @@ export default class Studente extends User {
         this._titoliStudioList = titoliStudioList;
         this._materieCompetenzaList = materieCompetenzaList;
         this._recensioniList = recensioniList;
-        this.saldo = 0; //in centesimi, poi in output lo converto
-        this.pagamentiList = pagamentiList;
+        this._saldo = 0; //in centesimi, poi in output lo converto
+        this._pagamentiList = pagamentiList;
     }
 
     get pagamentiList() {
         return this.pagamentiList;
     }
 
-    setPagamentiList(pagamento) {
+    set pagamentiList(pagamento) {
         if (pagamento instanceof Pagamento) {
             this.pagamentiList.push(pagamento);
-            this.aumentaSaldo(pagamento.importo);
+            this.setSaldo(pagamento.importo);
         } else {
             throw new Error("pagamento must be an instance of Pagamento");
         }
@@ -66,7 +67,7 @@ export default class Studente extends User {
         return this._saldo;
     }
 
-    aumentaSaldo(value) {
+    set saldo(value) {
         if (Number.isInteger(value)) {
             this._saldo = this._saldo + value;
         } else {

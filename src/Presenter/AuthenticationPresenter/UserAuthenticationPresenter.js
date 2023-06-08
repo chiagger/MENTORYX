@@ -33,8 +33,8 @@ function userLogin() {
       // Signed in 
       const user = userCredential.user;
       log.loginLog(user);
-      console.log(log.showAccessLog());
-      // redirectHome(user);
+      //console.log(log.showAccessLog());
+      redirectHome(user);
     })
     .catch((error) => {
       alert("Error: " + error.message);
