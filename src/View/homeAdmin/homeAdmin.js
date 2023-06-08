@@ -97,19 +97,27 @@ document.body.appendChild(tabsContainer);
 document.body.appendChild(emptyContainer);
 
 
-console.log(log.readRecordList("Accesso"));
-//view event log
+//view logs
 const logEventiBtn = document.getElementById("logEventi")
-logEventiBtn.addEventListener("click", () => { displayLog("Accesso") });
+logEventiBtn.addEventListener("click", () => { displayLog("Evento") });
+
+const logAccessiBtn = document.getElementById("logAccessi")
+logAccessiBtn.addEventListener("click", () => { displayLog("Accesso") });
 
 function displayLog(tipo) {
+    removeContainerChildren();
     var logList = log.readRecordList(tipo);
-    console.log(logList);
 
     for (var i = 0; i < logList.length; i++) {
         var logDOM = document.createElement("div");
         logDOM.classList.add("log");
-        logDOM.innerHTML = logList.at(i).desc;
+        logDOM.innerHTML = logList.at(i).descrizione;
         emptyContainer.appendChild(logDOM);
+    }
+}
+
+function removeContainerChildren() {
+    while (emptyContainer.firstChild) {
+        emptyContainer.removeChild(emptyContainer.firstChild);
     }
 }
