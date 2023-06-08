@@ -1,13 +1,15 @@
 //connect to firebase
-import { getAuth, createUserWithEmailAndPassword, getUser } from "firebase/auth";
-import { getDatabase, set, get, update, remove, ref, child } from 'firebase/database';
+import { getAuth } from "firebase/auth";
+import { getDatabase, get, update, ref, child } from 'firebase/database';
 import { app } from '../firebaseConfig.js';
 const auth = getAuth(app);
 const db = getDatabase();
 
 import TitoloStudio from '../../Model/TitoloStudio.js';
-import Studente from '../../Model/Studente.js';
-import { Ascoltatore, setTitoliStudioList } from '../../Model/Ascoltatore.js';
+import StudenteStrategy from './StudenteStrategy.js';
+import AscoltatoreStrategy from "./AscoltatoreStrategy.js";
+import UserService from './UserService.js';
+var service = new UserService();
 
 //valida data di conseguimento
 function validateDataConseguimento() {
@@ -40,21 +42,13 @@ async function saveTitoloToDatabase() {
     const utente = await getUtenteObject(uid);
     const category = await getUserCategory(uid);
     utente.setTitoliStudioList = titoloStudio; //SYNTAX FOR SETTERS!
-    const utenteJSON = JSON.stringify(utente);
 
     if (category === "Studente") {
-        alert("C'è stato un errore di categoria.");
+        service.setStrategy(new StudenteStrategy());
     } else {
-        update(ref(db, "Users/" + uid), {
-            Ascoltatore: utenteJSON,
-        })
-            .then(() => {
-                window.location.href = "auth.html";
-            })
-            .catch((error) => {
-                alert(error);
-            })
+        service.setStrategy(new AscoltatoreStrategy());
     }
+    service.inserisciTitoloStudio(uid, utente);
 }
 
 

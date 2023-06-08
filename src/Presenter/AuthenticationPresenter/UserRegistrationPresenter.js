@@ -4,11 +4,13 @@ import { getDatabase, set, get, update, remove, ref, child } from 'firebase/data
 import { app } from '../firebaseConfig.js';
 const auth = getAuth(app);
 
-import Studente from '../../Model/Studente.js';
-import Ascoltatore from '../../Model/Ascoltatore.js';
-
 import LogPresenter from "../LogPresenter/LogPresenter.js";
 const log = new LogPresenter();
+
+import StudenteStrategy from './StudenteStrategy.js';
+import AscoltatoreStrategy from "./AscoltatoreStrategy.js";
+import UserService from './UserService.js';
+var service = new UserService();
 
 
 //redirect from Login to Signup page
@@ -73,7 +75,6 @@ function signUp() {
 
 
 function registerUser(uid) {
-  const db = getDatabase();
   var name = document.getElementById('firstName').value;
   var surname = document.getElementById('lastName').value;
   var email = document.getElementById('email').value;
@@ -82,29 +83,11 @@ function registerUser(uid) {
 
   var utente;
   if (categoryText === "Studente") {
-    utente = new Studente(name, surname, email);
-    const utenteJSON = JSON.stringify(utente);
-    set(ref(db, "Users/" + uid), {
-      Studente: utenteJSON,
-    })
-      .then(() => {
-        window.location.href = "viewInserisciMetodoPagamento.html";
-      })
-      .catch((error) => {
-        alert(error);
-      })
+    service.setStrategy(new StudenteStrategy());
   } else {
-    utente = new Ascoltatore(name, surname, email);
-    const utenteJSON = JSON.stringify(utente);
-    set(ref(db, "Users/" + uid), {
-      Ascoltatore: utenteJSON,
-    })
-      .then(() => {
-        window.location.href = "viewInserisciMetodoPagamento.html";
-      })
-      .catch((error) => {
-        alert(error);
-      })
+    service.setStrategy(new AscoltatoreStrategy());
   }
+  service.signUpToDatabase(uid, utente, name, surname, email);
+
 }
 

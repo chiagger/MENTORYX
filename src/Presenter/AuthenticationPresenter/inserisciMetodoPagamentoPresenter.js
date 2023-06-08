@@ -1,14 +1,15 @@
 //connect to firebase
-import { getAuth, createUserWithEmailAndPassword, getUser } from "firebase/auth";
-import { getDatabase, set, get, update, remove, ref, child } from 'firebase/database';
+import { getAuth } from "firebase/auth";
+import { getDatabase, get, update, ref, child } from 'firebase/database';
 import { app } from '../firebaseConfig.js';
 const auth = getAuth(app);
 const db = getDatabase();
 
 import MetodoPagamento from '../../Model/MetodoPagamento.js';
-import { User, setMetodiPagamento } from '../../Model/User.js';
-import { Studente } from '../../Model/Studente.js';
-import { Ascoltatore } from '../../Model/Ascoltatore.js';
+import StudenteStrategy from './StudenteStrategy.js';
+import AscoltatoreStrategy from "./AscoltatoreStrategy.js";
+import UserService from './UserService.js';
+var service = new UserService();
 
 
 //FAKING credit card insertion
@@ -69,7 +70,9 @@ window.onload = function (e) {
 
 //Inserting payment method info to firebase
 const creditCardForm = document.getElementById('creditCardForm');
-creditCardForm.addEventListener('submit', async function (e) {
+creditCardForm.addEventListener('submit', addMetodoPagamento);
+
+async function addMetodoPagamento(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     var cardholder = document.getElementById("cardHolder").value;
@@ -83,55 +86,15 @@ creditCardForm.addEventListener('submit', async function (e) {
     metodoPagamento = new MetodoPagamento(cardholder, number, expiryDate, CVV);
     const utente = await getUtenteObject(uid);
     const category = await getUserCategory(uid);
-    utente.setMetodiPagamento = metodoPagamento; //SYNTAX FOR SETTERS!
-    const utenteJSON = JSON.stringify(utente);
+    utente.setMetodiPagamento = metodoPagamento;
 
     if (category === "Studente") {
-        update(ref(db, "Users/" + uid), {
-            Studente: utenteJSON,
-        })
-            .then(() => {
-                redirectUserRegistration(uid);
-            })
-            .catch((error) => {
-                alert(error);
-            })
+        service.setStrategy(new StudenteStrategy());
     } else {
-        update(ref(db, "Users/" + uid), {
-            Ascoltatore: utenteJSON,
-        })
-            .then(() => {
-                redirectUserRegistration(uid);
-            })
-            .catch((error) => {
-                alert(error);
-            })
+        service.setStrategy(new AscoltatoreStrategy());
     }
-
-
-
-});
-
-//redirect to login if student, to insert titolo di studio if ascoltatore
-function redirectUserRegistration(uid) {
-    const myUserData = ref(db);
-    get(child(myUserData, "Users/" + uid))
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                const snapshotValue = snapshot.val();
-                const childKeys = Object.keys(snapshotValue);
-                const category = childKeys[0];
-
-                if (category === "Studente") {
-                    window.location.href = 'auth.html';
-                } else {
-                    window.location.href = 'viewInserisciTitoloAscoltatore.html';
-                }
-            }
-        })
-        .catch((error) => { alert(error) })
+    service.inserisciMetodoPagamento(uid, utente);
 }
-
 
 function getUtenteObject(uid) {
     const myUserData = ref(db);

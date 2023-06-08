@@ -5,8 +5,12 @@ const auth = getAuth(app);
 const db = getDatabase();
 
 import LogPresenter from "../LogPresenter/LogPresenter.js";
-
 const log = new LogPresenter();
+
+import StudenteStrategy from './StudenteStrategy.js';
+import AscoltatoreStrategy from "./AscoltatoreStrategy.js";
+import UserService from './UserService.js';
+var service = new UserService();
 
 //redirect from Login to Signup page
 const signupLink = document.getElementById("signupLink");
@@ -33,8 +37,8 @@ function userLogin() {
       // Signed in 
       const user = userCredential.user;
       log.loginLog(user);
-      //console.log(log.showAccessLog());
       redirectHome(user);
+
     })
     .catch((error) => {
       alert("Error: " + error.message);
@@ -60,11 +64,11 @@ async function redirectHome(user) {
     const category = await getUserCategory(uid);
 
     if (category === "Studente") {
-      window.location.href = 'homeStudente.html';
+      service.setStrategy(new StudenteStrategy());
     } else if (category === "Ascoltatore") {
-      window.location.href = 'homeAscoltatore.html';
-
+      service.setStrategy(new AscoltatoreStrategy());
     }
+    service.homeRedirectAfterLogin();
   }
 
 }

@@ -15,6 +15,47 @@ export default class LogPresenter {
         log.addRecord(record);
     }
 
+    logoutLog(user) {
+        const desc = user.email + " logged out";
+
+        var record = new Record(new Date(), "Accesso", desc);
+        log.addRecord(record);
+    }
+
+    changedPasswordLog(user) {
+        const desc = user.email + " changed password";
+
+        var record = new Record(new Date(), "Evento", desc);
+        log.addRecord(record);
+    }
+
+    assignedMaterieCompetenza(listener) {
+        const desc = listener.email + " was assigned compatible Subjects by admin";
+
+        var record = new Record(new Date(), "Evento", desc);
+        log.addRecord(record);
+    }
+
+    startedChat(student, listener) {
+        const desc = listener.email + " was contacted by " + student.email;
+
+        var record = new Record(new Date(), "Evento", desc);
+        log.addRecord(record);
+    }
+
+    startedCall(student, listener) {
+        const desc = listener.email + " and " + student.email + " are in a call.";
+
+        var record = new Record(new Date(), "Evento", desc);
+        log.addRecord(record);
+    }
+
+    endedCall(student, listener) {
+        const desc = listener.email + " and " + student.email + " are no longer in a call.";
+        var record = new Record(new Date(), "Evento", desc);
+        log.addRecord(record);
+    }
+
     showAccessLog() {
         return log.readRecordList("Accesso");
     }
