@@ -9,14 +9,6 @@ export default class Record {
         this.descrizione = descrizione;
     }
 
-    getDescrizione() {
-        return this.descrizione;
-    }
-
-    setDescrizione(value) {
-        this.descrizione = value;
-    }
-
     getTimestamp() {
         return this.timestamp;
     }

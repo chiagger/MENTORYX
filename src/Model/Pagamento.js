@@ -1,8 +1,10 @@
 export default class Pagamento {
-    constructor(data, importo = 800) {
+    constructor(aAscoltatore, data, importo = 800) {
+        this._aAscoltatore = null;
         this._data = null;
         this._importo = null;
 
+        this.setaAscoltatore(aAscoltatore);
         this.setData(data);
         this.setImporto(importo);
     }
@@ -26,6 +28,18 @@ export default class Pagamento {
         }
     }
 
+    get aAscoltatore() {
+        return this.aAscoltatore;
+    }
+
+    setaAscoltatore(aAscoltatore) {
+        if (aAscoltatore instanceof Ascoltatore) {
+            this.aAscoltatore = aAscoltatore;
+        } else {
+            throw new Error('aAscoltarore must be an instance of Ascoltatore.');
+        }
+    }
+
     // Getter method for the importo property
     get importo() {
         return this._importo;
@@ -43,5 +57,9 @@ export default class Pagamento {
         } else {
             throw new Error('importo must be an integer value.');
         }
+    }
+
+    importoToEuro() {
+        return this.importo / 100;
     }
 }

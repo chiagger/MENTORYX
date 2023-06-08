@@ -10,31 +10,15 @@ export default class MetodoPagamento {
         return this.cardHolder;
     }
 
-    setCardHolder(cardHolder) {
-        this.cardHolder = cardHolder;
-    }
-
     getCardNumber() {
         return this.cardNumber;
-    }
-
-    setCardNumber(cardNumber) {
-        this.cardNumber = cardNumber;
     }
 
     getCardExpiryDate() {
         return this.cardExpiryDate;
     }
 
-    setCardExpiryDate(cardExpiryDate) {
-        this.cardExpiryDate = cardExpiryDate;
-    }
-
     getCardCVV() {
         return this.cardCVV;
-    }
-
-    setCardCVV(cardCVV) {
-        this.cardCVV = cardCVV;
     }
 }

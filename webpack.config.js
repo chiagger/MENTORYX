@@ -31,6 +31,7 @@ module.exports = {
     impostazioniPresenter: './src/Presenter/EventsPresenter/impostazioniEventsPresenter',
     homeAdmin: './src/View/homeAdmin/homeAdmin.js',
     adminEventsPresenter: './src/Presenter/EventsPresenter/adminEventsPresenter.js',
+    logPresenter: './src/Presenter/LogPresenter/LogPresenter.js',
   },
   plugins: [
     new HtmlWebpackPlugin({

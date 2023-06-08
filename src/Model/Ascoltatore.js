@@ -3,12 +3,27 @@ import User from './User.js';
 
 export default class Studente extends User {
     constructor(firstName, lastName, email, metodiPagamento = [],
-        titoliStudioList = [], materieCompetenzaList = [], recensioniList = [],) {
+        titoliStudioList = [], materieCompetenzaList = [], recensioniList = [],
+        pagamentiList = []) {
         super(firstName, lastName, email, metodiPagamento);
         this._titoliStudioList = titoliStudioList;
         this._materieCompetenzaList = materieCompetenzaList;
         this._recensioniList = recensioniList;
         this.saldo = 0; //in centesimi, poi in output lo converto
+        this.pagamentiList = pagamentiList;
+    }
+
+    get pagamentiList() {
+        return this.pagamentiList;
+    }
+
+    setPagamentiList(pagamento) {
+        if (pagamento instanceof Pagamento) {
+            this.pagamentiList.push(pagamento);
+            this.aumentaSaldo(pagamento.importo);
+        } else {
+            throw new Error("pagamento must be an instance of Pagamento");
+        }
     }
 
     get titoliStudioList() {
@@ -51,16 +66,15 @@ export default class Studente extends User {
         return this._saldo;
     }
 
-    set saldo(value) { //value in centesimi
-        this.setSaldo(value);
-    }
-
-
-    setSaldo(value) {
+    aumentaSaldo(value) {
         if (Number.isInteger(value)) {
             this._saldo = this._saldo + value;
         } else {
             throw new Error('importo must be an integer value.');
         }
+    }
+
+    getSaldoInEuro() {
+        return this.saldo / 100;
     }
 }

@@ -10,38 +10,24 @@ export default class TitoloStudio {
         return this._tipoTitolo;
     }
 
-    set tipoTitolo(newTipoTitolo) {
-        this._tipoTitolo = newTipoTitolo;
-    }
-
     get ambitoTitolo() {
         return this._ambitoTitolo;
-    }
-
-    set ambitoTitolo(newAmbitoTitolo) {
-        this._ambitoTitolo = newAmbitoTitolo;
     }
 
     get pressoTitolo() {
         return this._pressoTitolo;
     }
 
-    set pressoTitolo(newPressoTitolo) {
-        this._pressoTitolo = newPressoTitolo;
-    }
-
     get dataConseguimentoTitolo() {
         return this._dataConseguimentoTitolo;
     }
 
-    set dataConseguimentoTitolo(newDataConseguimentoTitolo) {
-        this._dataConseguimentoTitolo = newDataConseguimentoTitolo;
-    }
-
-    displayInfo() {
-        console.log(`Tipo di Titolo: ${this.tipoTitolo}`);
-        console.log(`Ambito del Titolo: ${this.ambitoTitolo}`);
-        console.log(`Presso: ${this.pressoTitolo}`);
-        console.log(`Data di Conseguimento: ${this.dataConseguimentoTitolo}`);
+    dataConseguimentoToDate() {
+        const dateParts = this.dataConseguimentoTitolo.value.split('/');
+        const day = parseInt(dateParts[0], 10);
+        const month = parseInt(dateParts[1], 10) - 1; // Months are zero-based in JavaScript Date object
+        const year = parseInt(dateParts[2], 10);
+        const dataConseguimento = new Date(year, month, day);
+        return dataConseguimento;
     }
 }

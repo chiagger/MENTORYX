@@ -11,17 +11,10 @@ export default class Recensione {
         return this._daStudente;
     }
 
-    set daStudente(studente) {
-        this._daStudente = studente;
-    }
-
     get titolo() {
         return this._titolo;
     }
 
-    set titolo(value) {
-        this._titolo = value;
-    }
 
     get descrizione() {
         return this._descrizione;
@@ -33,10 +26,6 @@ export default class Recensione {
 
     get rating() {
         return this._rating;
-    }
-
-    set rating(rating) {
-        this.setRating(rating);
     }
 
     // Helper method to validate and set the rating

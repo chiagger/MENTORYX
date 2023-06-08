@@ -49,18 +49,30 @@ export default class User {
     }
   }
 
-  setChatList(chat, videochiamata) {
+
+
+  setChatList(chat) {
     if (chat instanceof Chat) {
       this.chatList.push({
         chat,
-        videochiamataList: [videochiamata],
+        videochiamataList: [],
       });
     } else {
       throw new Error("Invalid Chat object");
     }
   }
 
-  addVideochiamataToChat(chatIndex, videochiamata) {
+  findChatIndex(chat) {
+    for (let i = 0; i < this.chatList.length; i++) {
+      if (this.chatList[i].chat === chat) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  addVideochiamataToChat(chat, videochiamata) {
+    var chatIndex = this.findChatIndex(chat);
     if (videochiamata instanceof Videochiamata) {
       if (chatIndex >= 0 && chatIndex < this.chatList.length) {
         this.chatList[chatIndex].videochiamataList.push(videochiamata);
@@ -72,20 +84,3 @@ export default class User {
     }
   }
 }
-
-
-/*  ESEMPIO DI COME USARLO
-const user = new User("John", "Doe", "john@example.com");
-
-// Creating a Chat and Videochiamata objects
-const chat = new Chat();
-const videochiamata = new Videochiamata();
-
-// Adding the Chat and Videochiamata to the user's chatList
-user.setChatList(chat, videochiamata);
-
-// Adding another Videochiamata to the existing chat
-const anotherVideochiamata = new Videochiamata();
-user.addVideochiamataToChat(0, anotherVideochiamata);
-
-*/
