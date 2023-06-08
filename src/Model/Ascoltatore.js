@@ -2,7 +2,7 @@ import User from './User.js';
 import Pagamento from './Pagamento.js';
 
 
-export default class Studente extends User {
+export default class Ascoltatore extends User {
     constructor(firstName, lastName, email, metodiPagamento = [],
         titoliStudioList = [], materieCompetenzaList = [], recensioniList = [],
         pagamentiList = []) {

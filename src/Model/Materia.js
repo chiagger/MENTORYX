@@ -1,4 +1,4 @@
-class Materia {
+export default class Materia {
     static Matematica = 'Matematica';
     static Scienze = 'Scienze';
     static Storia = 'Storia';

@@ -1,5 +1,5 @@
-//concrete class implements UserStrategy
 import UserStrategy from "./UserStrategy";
+
 import { getAuth, signInWithEmailAndPassword, getUser } from "firebase/auth";
 import { getDatabase, set, get, update, remove, ref, child, orderByChild, equalTo, query, once } from 'firebase/database';
 import { app } from '../firebaseConfig.js';
