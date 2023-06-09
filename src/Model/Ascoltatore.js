@@ -8,7 +8,7 @@ export default class Ascoltatore extends User {
         pagamentiList = []) {
         super(firstName, lastName, email, metodiPagamento);
         this._titoliStudioList = titoliStudioList;
-        this._materieCompetenzaList = materieCompetenzaList;
+        this._materieCompetenzaList = Array.isArray(materieCompetenzaList) ? materieCompetenzaList : [];
         this._recensioniList = recensioniList;
         this._saldo = 0; //in centesimi, poi in output lo converto
         this._pagamentiList = pagamentiList;
@@ -43,13 +43,21 @@ export default class Ascoltatore extends User {
         return this._materieCompetenzaList;
     }
 
+
     set materieCompetenzaList(materia) {
-        if (materia instanceof Materia) {
-            this._materieCompetenzaList.push(materia);
-        } else {
-            throw new Error("Oggetto Materia non valido");
+
+        if (Array.isArray(materieCompetenzaList)) {
+            for (const materia of materieCompetenzaList) {
+                if (materia instanceof Materia) {
+                    this._materieCompetenzaList.push(materia);
+                } else {
+                    throw new Error("Oggetto Materia non valido");
+                }
+            }
         }
     }
+
+
 
     get recensioniList() {
         return this._recensioniList;

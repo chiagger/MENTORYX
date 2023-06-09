@@ -41,7 +41,7 @@ async function saveTitoloToDatabase() {
 
     const utente = await getUtenteObject(uid);
     const category = await getUserCategory(uid);
-    utente.titoliStudioList = titoloStudio; //SYNTAX FOR SETTERS!
+    utente._titoliStudioList.push(titoloStudio); //SYNTAX FOR SETTERS!
 
     if (category === "Studente") {
         service.setStrategy(new StudenteStrategy());

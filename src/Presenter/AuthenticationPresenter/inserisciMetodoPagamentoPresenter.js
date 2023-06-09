@@ -86,7 +86,7 @@ async function addMetodoPagamento(e) {
     metodoPagamento = new MetodoPagamento(cardholder, number, expiryDate, CVV);
     const utente = await getUtenteObject(uid);
     const category = await getUserCategory(uid);
-    utente.metodiPagamento = metodoPagamento;
+    utente.metodiPagamento.push(metodoPagamento);
 
     if (category === "Studente") {
         service.setStrategy(new StudenteStrategy());
