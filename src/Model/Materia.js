@@ -24,19 +24,6 @@ export default class Materia {
     static Psicologia = 'Psicologia';
     static Sociologia = 'Sociologia';
 
-    getEnumValue(key) {
-        const reverseMapping = {};
-
-        for (const prop in Materia) {
-            if (Object.prototype.hasOwnProperty.call(Materia, prop)) {
-                const value = Materia[prop];
-                reverseMapping[value] = prop;
-            }
-        }
-
-        return Materia[reverseMapping[key]];
-    }
-
 }
 
 

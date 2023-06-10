@@ -12,6 +12,8 @@ import AscoltatoreStrategy from "./AscoltatoreStrategy.js";
 import UserService from './UserService.js';
 var service = new UserService();
 
+
+
 //redirect from Login to Signup page
 const signupLink = document.getElementById("signupLink");
 signupLink.addEventListener("click", handleSignup);
@@ -33,9 +35,12 @@ function userLogin() {
   var password = document.getElementById("password").value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
+    .then(async (userCredential) => {
       const user = userCredential.user;
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      const category = await getUserCategory(user.uid);
+      console.log(category);
+      localStorage.setItem('currentUserCategory', category)
       redirectHome(user);
 
     })
@@ -78,10 +83,15 @@ async function redirectHome(user) {
 function getUserCategory(uid) {
   const myUserData = ref(db);
   return get(child(myUserData, "Users/" + uid))
-    .then((snapshot) => {
+    .then(async (snapshot) => {
       const snapshotValue = snapshot.val();
       const childKeys = Object.keys(snapshotValue);
-      const category = childKeys[0];
+      var category = childKeys[0];
+      const utenteObj = await getUtenteObject(uid);
+      console.log(utenteObj);
+      if (utenteObj.email === "busca.chiara.cb@gmail.com") {
+        category = "Amministratore";
+      }
       return category;
     })
     .catch((error) => {
@@ -104,4 +114,7 @@ function getUtenteObject(uid) {
       throw error; // Propagate the error further
     });
 }
+
+
+
 

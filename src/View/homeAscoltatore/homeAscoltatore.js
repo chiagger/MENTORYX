@@ -7,6 +7,41 @@ cssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/a
 head.appendChild(cssLink);
 
 
+window.onload = () => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+        notSignedIn();
+    } else {
+        const category = localStorage.getItem("currentUserCategory");
+        if (category !== "Ascoltatore") {
+            notSignedInCorrectly();
+        }
+    }
+}
+
+function notSignedIn() {
+    // Display alert message
+    alert("You are not signed in");
+
+    // Wait for 3 seconds (3000 milliseconds)
+    setTimeout(function () {
+        // Redirect to index.html
+        window.location.href = "index.html";
+    }, 500);
+}
+
+function notSignedInCorrectly() {
+    // Display alert message
+    alert("You are not correctly signed in");
+
+    // Wait for 3 seconds (3000 milliseconds)
+    setTimeout(function () {
+        // Redirect to index.html
+        window.location.href = "index.html";
+    }, 500);
+}
+
+
 // Create header element
 const header = document.createElement('header');
 header.id = 'header';

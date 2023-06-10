@@ -2,62 +2,15 @@ import { getAuth, signOut } from "firebase/auth";
 import { getDatabase, get, update, ref, child, onValue } from 'firebase/database';
 import { app } from '../firebaseConfig.js';
 const auth = getAuth(app);
-import log from '../../Model/ModelLog/Log';
 import Materia from '../../Model/Materia';
 import Ascoltatore from "../../Model/Ascoltatore.js";
+import LogPresenter from "../LogPresenter/LogPresenter.js";
+const log = new LogPresenter();
+
 
 
 const db = getDatabase();
 const emptyContainer = document.getElementById("empty-container");
-
-// Mostra o nasconde il dropdown del profilo
-document.getElementById("profile-icon").addEventListener("click", function () {
-    const profileDropdown = document.getElementById("profile-dropdown");
-    profileDropdown.style.display = (profileDropdown.style.display === "block") ? "none" : "block";
-});
-
-// Aggiunta effetti visivi dinamici e responsivi
-window.addEventListener("mousemove", function (e) {
-    const balls = document.querySelectorAll(".ball");
-    const mouseX = e.pageX;
-    const mouseY = e.pageY;
-
-    balls.forEach(function (ball) {
-        const ballX = ball.getBoundingClientRect().left + ball.clientWidth / 2;
-        const ballY = ball.getBoundingClientRect().top + ball.clientHeight / 2;
-
-        const diffX = mouseX - ballX;
-        const diffY = mouseY - ballY;
-
-        const distance = Math.sqrt(diffX * diffX + diffY * diffY);
-
-        const maxDistance = Math.max(window.innerWidth, window.innerHeight) / 2;
-
-        const scale = 1 - distance / maxDistance;
-
-        ball.style.transform = `scale(${scale})`;
-    });
-});
-
-
-//logout functionality
-const logoutLink = document.getElementById('logoutLink');
-logoutLink.addEventListener("click", () => {
-    signOut(auth).then(() => {
-        window.location.href = "index.html";
-    }).catch((error) => {
-        alert(error);
-    })
-});
-
-const settingsLink = document.getElementById('settingsLink');
-settingsLink.addEventListener("click", () => {
-    window.location.href = "impostazioni.html";
-});
-
-
-
-
 
 //materieAscoltatore view
 const assegnaMaterieBtn = document.getElementById("assegnaMaterie")
@@ -189,6 +142,7 @@ function submitForm(ascoltatoreuid) {
         ascoltatore._materieCompetenzaList.push(getEnumValue(Materia, selectedOptions.at(i)));
     }
     updateDB(ascoltatore, uid);
+    log.assignedMaterieCompetenza(ascoltatore);
 
     // Hide the popup form
     document.getElementById('popupForm').style.display = 'none';

@@ -5,6 +5,7 @@ import { getDatabase, set, get, update, remove, ref, child, orderByChild, equalT
 import { app } from '../firebaseConfig.js';
 import Ascoltatore from '../../Model/Ascoltatore';
 const db = getDatabase();
+import LogPresenter from "../LogPresenter/LogPresenter";
 
 
 export default class AscoltatoreStrategy extends UserStrategy {

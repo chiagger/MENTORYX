@@ -1,6 +1,5 @@
 import "./homeAdmin.css";
 import log from '../../Model/ModelLog/Log';
-import Materia from '../../Model/Materia';
 import { getAuth } from "firebase/auth";
 
 import { getDatabase, child, get, update, ref, onValue } from 'firebase/database';
@@ -16,6 +15,40 @@ const cssLink = document.createElement('link');
 cssLink.rel = 'stylesheet';
 cssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
 head.appendChild(cssLink);
+
+window.onload = () => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+        notSignedIn();
+    } else {
+        const category = localStorage.getItem("currentUserCategory");
+        if (category !== "Amministratore") {
+            notSignedInCorrectly();
+        }
+    }
+}
+
+function notSignedIn() {
+    // Display alert message
+    alert("You are not signed in");
+
+    // Wait for 3 seconds (3000 milliseconds)
+    setTimeout(function () {
+        // Redirect to index.html
+        window.location.href = "index.html";
+    }, 500);
+}
+
+function notSignedInCorrectly() {
+    // Display alert message
+    alert("You are not correctly signed in");
+
+    // Wait for 3 seconds (3000 milliseconds)
+    setTimeout(function () {
+        // Redirect to index.html
+        window.location.href = "index.html";
+    }, 500);
+}
 
 
 

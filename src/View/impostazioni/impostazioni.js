@@ -1,5 +1,25 @@
 import './impostazioni.css';
 
+
+
+window.onload = () => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+        notSignedIn();
+    }
+}
+
+function notSignedIn() {
+    // Display alert message
+    alert("You are not signed in");
+
+    // Wait for 3 seconds (3000 milliseconds)
+    setTimeout(function () {
+        // Redirect to index.html
+        window.location.href = "index.html";
+    }, 500);
+}
+
 const container = document.createElement('div');
 container.classList.add('container');
 

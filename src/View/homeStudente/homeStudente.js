@@ -7,6 +7,46 @@ cssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/a
 head.appendChild(cssLink);
 
 
+
+
+window.onload = () => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+        notSignedIn();
+    } else {
+        const category = localStorage.getItem("currentUserCategory");
+        if (category !== "Studente") {
+            notSignedInCorrectly();
+        }
+    }
+}
+
+function notSignedIn() {
+    // Display alert message
+    alert("You are not signed in");
+
+    // Wait for 3 seconds (3000 milliseconds)
+    setTimeout(function () {
+        // Redirect to index.html
+        window.location.href = "index.html";
+    }, 500);
+}
+
+function notSignedInCorrectly() {
+    // Display alert message
+    alert("You are not correctly signed in");
+
+    // Wait for 3 seconds (3000 milliseconds)
+    setTimeout(function () {
+        // Redirect to index.html
+        window.location.href = "index.html";
+    }, 500);
+}
+
+
+const emptyContainer = document.createElement('div');
+emptyContainer.id = 'emptyContainer';
+
 // Create header element
 const header = document.createElement('header');
 header.id = 'header';
@@ -90,13 +130,14 @@ heading.textContent = 'Benvenuto su ';
 
 const logobig = document.createElement('img');
 logobig.setAttribute('id', 'logobig');
-logobig.src = "https://i.imgur.com/UTazMbC.png";
+logobig.src = 'https://i.imgur.com/UTazMbC.png';
 heading.appendChild(logobig);
 
 // Create paragraph element
 const paragraph = document.createElement('p');
-paragraph.textContent = "Trasforma il tuo percorso di studio facilitando il tuo apprendimento! "
-    + "Connettiti con ascoltatori competenti cercandoli nella barra di ricerca qua sotto: ";
+paragraph.textContent =
+    'Trasforma il tuo percorso di studio facilitando il tuo apprendimento! ' +
+    'Connettiti con ascoltatori competenti cercandoli nella barra di ricerca qua sotto: ';
 
 // Create form element
 const form = document.createElement('form');
@@ -110,6 +151,7 @@ input.placeholder = 'Cerca per materia...';
 
 // Create submit button
 const button = document.createElement('button');
+button.id = "cercaBtn";
 button.type = 'submit';
 button.innerHTML = '<i class="fas fa-search"></i>';
 
@@ -126,6 +168,9 @@ description.appendChild(form);
 content.appendChild(imageContainer);
 content.appendChild(description);
 
-// Append header and content to the document body
+// Append header and content to the emptyContainer
 document.body.appendChild(header);
-document.body.appendChild(content);
+emptyContainer.appendChild(content);
+
+// Append emptyContainer to the document body
+document.body.appendChild(emptyContainer);

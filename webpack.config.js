@@ -32,6 +32,7 @@ module.exports = {
     homeAdmin: './src/View/homeAdmin/homeAdmin.js',
     adminEventsPresenter: './src/Presenter/EventsPresenter/adminEventsPresenter.js',
     logPresenter: './src/Presenter/LogPresenter/LogPresenter.js',
+    commonEvents: './src/Presenter/EventsPresenter/commonEvents.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -52,12 +53,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'homeStudente.html',
       title: 'Home',
-      chunks: ['homeStudente', 'studentEventsPresenter'],
+      chunks: ['homeStudente', 'studentEventsPresenter', 'commonEvents'],
     }),
     new HtmlWebpackPlugin({
       filename: 'homeAscoltatore.html',
       title: 'Home',
-      chunks: ['homeAscoltatore', 'ascoltatoreEventsPresenter'],
+      chunks: ['homeAscoltatore', 'ascoltatoreEventsPresenter', 'commonEvents'],
     }),
     new HtmlWebpackPlugin({
       filename: 'viewInserisciMetodoPagamento.html',
@@ -77,7 +78,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'homeAdmin.html',
       title: 'Home',
-      chunks: ['homeAdmin', 'adminEventsPresenter'],
+      chunks: ['homeAdmin', 'adminEventsPresenter', 'commonEvents'],
     }),
   ],
   output: {

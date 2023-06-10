@@ -1,9 +1,15 @@
 import Record from './Record.js';
 
+import { getAuth } from "firebase/auth";
+import { getDatabase, get, ref, child, set, push } from 'firebase/database';
+import { app } from '../../Presenter/firebaseConfig.js';
+const db = getDatabase();
+
 class Log {
     constructor() {
         if (Log.instance == null) {
-            this.loadRecordList();
+            this.recordList = [];
+            this.loadRecordListFromFirebase();
             Log.instance = this;
         }
         return Log.instance;
@@ -12,31 +18,42 @@ class Log {
     addRecord(record) {
         if (record instanceof Record) {
             this.recordList.push(record);
-            this.saveRecordList(); // Save record list to localStorage
+            this.saveRecordToFirebase(record); // Save the record to Firebase Realtime Database
         } else {
-            throw new Error("Record invalid");
+            throw new Error('Record invalid');
         }
     }
 
     readRecordList(tipo) {
-        return this.recordList.filter(record => record.tipo === tipo); // Access 'tipo' directly
+        return this.recordList.filter((record) => record.tipo === tipo);
     }
 
-    saveRecordList() {
-        localStorage.setItem('recordList', JSON.stringify(this.recordList));
+    saveRecordToFirebase(record) {
+        const databaseRef = ref(db, 'Log/');
+        const newRecordRef = push(databaseRef); // Generate a new unique key
+        set(newRecordRef, record)
+            .catch((error) => {
+                console.error('Error saving record:', error);
+            });
     }
 
-    loadRecordList() {
-        const storedRecordList = localStorage.getItem('recordList');
-        if (storedRecordList) {
-            const parsedRecordList = JSON.parse(storedRecordList);
-            this.recordList = parsedRecordList.map(recordData => new Record(recordData.timestamp, recordData.tipo, recordData.descrizione));
-        } else {
-            this.recordList = [];
-        }
+    loadRecordListFromFirebase() {
+        const databaseRef = ref(db, 'Log/');
+
+        get(databaseRef)
+            .then((snapshot) => {
+                const retrievedRecordList = snapshot.val();
+                if (retrievedRecordList) {
+                    this.recordList = Object.values(retrievedRecordList).map(
+                        (recordData) => new Record(recordData.timestamp, recordData.tipo, recordData.descrizione)
+                    );
+                }
+            })
+            .catch((error) => {
+                console.error('Error retrieving record list:', error);
+            });
     }
 }
 
 const log = new Log();
-Object.freeze(log);
 export default log;
