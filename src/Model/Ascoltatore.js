@@ -3,7 +3,7 @@ import Pagamento from './Pagamento.js';
 
 
 export default class Ascoltatore extends User {
-    constructor(firstName, lastName, email, metodiPagamento = [],
+    constructor(firstName, lastName, email, bio, metodiPagamento = [],
         titoliStudioList = [], materieCompetenzaList = [], recensioniList = [],
         pagamentiList = []) {
         super(firstName, lastName, email, metodiPagamento);
@@ -12,6 +12,15 @@ export default class Ascoltatore extends User {
         this._recensioniList = recensioniList;
         this._saldo = 0; //in centesimi, poi in output lo converto
         this._pagamentiList = pagamentiList;
+        this._bio = bio;
+    }
+
+    get bio() {
+        return this._bio;
+    }
+
+    set bio(bio) {
+        this._bio = bio;
     }
 
     get pagamentiList() {

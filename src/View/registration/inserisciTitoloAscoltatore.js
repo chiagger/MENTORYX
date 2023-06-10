@@ -79,6 +79,24 @@ const dataConseguimentoLabel = document.createElement('label');
 dataConseguimentoLabel.textContent = 'DATA DI CONSEGUIMENTO';
 dataConseguimentoDiv.appendChild(dataConseguimentoLabel);
 
+
+const bioDiv = document.createElement('div');
+bioDiv.classList.add('user-box');
+form.appendChild(bioDiv);
+
+
+const bioInput = document.createElement('textarea');
+bioInput.setAttribute('id', 'bio');
+bioInput.setAttribute('required', '');
+bioDiv.appendChild(bioInput);
+
+
+const bioLabel = document.createElement('label');
+bioLabel.textContent = 'Breve descrizione per il tuo profilo:';
+bioDiv.appendChild(bioLabel);
+
+
+
 const assistenzaDiv = document.createElement('div');
 assistenzaDiv.innerHTML = "Se vuoi aggiungere un altro titolo di studio, contatta l'assistenza dalle impostazioni.";
 assistenzaDiv.classList.add("assistenza");

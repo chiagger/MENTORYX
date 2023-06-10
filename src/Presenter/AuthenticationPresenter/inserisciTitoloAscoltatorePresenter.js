@@ -32,6 +32,7 @@ async function saveTitoloToDatabase() {
     var nome = document.getElementById("nomeTitolo").value;
     var ambito = document.getElementById("ambitoTitolo").value;
     var presso = document.getElementById("presso").value;
+    var bio = document.getElementById("bio").value;
     var dataConseguimento = document.getElementById("dataConseguimento").value;
     var uid = auth.currentUser.uid;
 
@@ -41,11 +42,13 @@ async function saveTitoloToDatabase() {
 
     const utente = await getUtenteObject(uid);
     const category = await getUserCategory(uid);
-    utente._titoliStudioList.push(titoloStudio); //SYNTAX FOR SETTERS!
+
 
     if (category === "Studente") {
         service.setStrategy(new StudenteStrategy());
     } else {
+        utente._titoliStudioList.push(titoloStudio); //SYNTAX FOR SETTERS!
+        utente._bio = bio;
         service.setStrategy(new AscoltatoreStrategy());
     }
     service.inserisciTitoloStudio(uid, utente);
