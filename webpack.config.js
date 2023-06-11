@@ -33,6 +33,14 @@ module.exports = {
     adminEventsPresenter: './src/Presenter/EventsPresenter/adminEventsPresenter.js',
     logPresenter: './src/Presenter/LogPresenter/LogPresenter.js',
     commonEvents: './src/Presenter/EventsPresenter/commonEvents.js',
+    inserisciAbbonamento: './src/View/registration/inserisciAbbonamento.js',
+    inserisciAbbonamentoPresenter: './src/Presenter/AuthenticationPresenter/inserisciAbbonamentoPresenter.js',
+    profiloAscoltatore: './src/View/profiloAscoltatore/profiloAscoltatore.js',
+    profiloAscoltatorePresenter: './src/Presenter/EventsPresenter/profiloAscoltatoreEventsPresenter.js',
+    chatListStudente: './src/View/chatList/chatListStudente.js',
+    chatListStudenteEventsPresenter: './src/Presenter/EventsPresenter/chatListStudenteEventsPresenter.js',
+    chatListAscoltatore: './src/View/chatList/chatListAscoltatore.js',
+    chatListAscoltatoreEventsPresenter: './src/Presenter/EventsPresenter/chatListAscoltatoreEventsPresenter.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -71,6 +79,11 @@ module.exports = {
       chunks: ['inserisciTitoloAscoltatore', 'inserisciTitoloAscoltatorePresenter'],
     }),
     new HtmlWebpackPlugin({
+      filename: 'inserisciAbbonamento.html',
+      title: 'Sign Up',
+      chunks: ['inserisciAbbonamento', 'inserisciAbbonamentoPresenter'],
+    }),
+    new HtmlWebpackPlugin({
       filename: 'impostazioni.html',
       title: 'Settings',
       chunks: ['impostazioni', 'impostazioniPresenter'],
@@ -79,6 +92,21 @@ module.exports = {
       filename: 'homeAdmin.html',
       title: 'Home',
       chunks: ['homeAdmin', 'adminEventsPresenter', 'commonEvents'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'profiloAscoltatore.html',
+      title: 'Home',
+      chunks: ['profiloAscoltatore', 'profiloAscoltatorePresenter'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'chatListStudente.html',
+      title: 'Chat',
+      chunks: ['chatListStudente', 'chatListStudenteEventsPresenter'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'chatListAscoltatore.html',
+      title: 'Chat',
+      chunks: ['chatListAscoltatore', 'chatListAscoltatoreEventsPresenter'],
     }),
   ],
   output: {

@@ -10,7 +10,7 @@ import Studente from '../../Model/Studente.js';
 export default class StudenteStrategy extends UserStrategy {
 
     viewRedirectAfterMetodoPagamento() {
-        window.location.href = 'auth.html';
+        window.location.href = 'inserisciAbbonamento.html';
     }
 
     inserisciMetodoPagamento(uid, utente) {
@@ -20,6 +20,19 @@ export default class StudenteStrategy extends UserStrategy {
         })
             .then(() => {
                 this.viewRedirectAfterMetodoPagamento();
+            })
+            .catch((error) => {
+                alert(error);
+            })
+    }
+
+    inserisciAbbonamento(uid, utente) {
+        const utenteJSON = JSON.stringify(utente);
+        update(ref(db, "Users/" + uid), {
+            Studente: utenteJSON,
+        })
+            .then(() => {
+                window.location.href = "auth.html";
             })
             .catch((error) => {
                 alert(error);

@@ -3,7 +3,6 @@ import { getDatabase, get, update, ref, child, onValue } from 'firebase/database
 import { app } from '../firebaseConfig.js';
 const auth = getAuth(app);
 import Materia from '../../Model/Materia';
-import Ascoltatore from "../../Model/Ascoltatore.js";
 import LogPresenter from "../LogPresenter/LogPresenter.js";
 const log = new LogPresenter();
 

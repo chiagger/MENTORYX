@@ -49,9 +49,9 @@ function createAscoltatoriElements(ascoltatoriCompatibili, innerContainer) {
         const materieDiv = document.createElement('div');
         materieDiv.innerHTML = ascoltatore._materieCompetenzaList.join(', ');
 
-        const contattaBtn = document.createElement("button");
-        contattaBtn.id = "contattaBtn";
-        contattaBtn.innerHTML = "Scrivi";
+        const dettagliBtn = document.createElement("button");
+        dettagliBtn.id = "dettagliBtn";
+        dettagliBtn.innerHTML = "Dettagli";
 
         const ratingDiv = document.createElement("div");
         ratingDiv.id = "ratingDiv";
@@ -72,12 +72,27 @@ function createAscoltatoriElements(ascoltatoriCompatibili, innerContainer) {
         div.appendChild(materieDiv);
         div.appendChild(ratingDiv);
         div.appendChild(descrizioneDiv);
-        div.appendChild(contattaBtn);
+        div.appendChild(dettagliBtn);
 
         innerContainer.appendChild(div);
     });
     document.body.appendChild(innerContainer);
 
+    //Open assegna popup
+    const dettagliBtns = document.querySelectorAll('#dettagliBtn');
+    const dettagliBtnArray = Array.from(dettagliBtns);
+    console.log(dettagliBtnArray);
+    for (let k = 0; k < dettagliBtnArray.length; k++) {
+        dettagliBtnArray.at(k).addEventListener('click', () => {
+            openAscoltatoreProfile(ascoltatoriCompatibili.at(k));
+        })
+    };
+
+}
+
+function openAscoltatoreProfile(ascoltatore) {
+    localStorage.setItem('selectedAscoltatore', JSON.stringify(ascoltatore));
+    window.location.href = "profiloAscoltatore.html";
 }
 
 function calculateAverageRating(recensioniList) {
@@ -125,3 +140,11 @@ function capitalizeFirstChar(str) {
 
     return firstChar + remainingChars;
 }
+
+
+
+
+const chatLink = document.getElementById('chatLink');
+chatLink.addEventListener("click", () => {
+    window.location.href = "chatListStudente.html";
+});

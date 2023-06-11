@@ -1,8 +1,13 @@
 class Abbonamento {
-    static Mensile = 20;
-    static Annuale = 220;
+    static Mensile = {
+        value: 20,
+        name: "MENSILE"
+    };
+
+    static Annuale = {
+        value: 220,
+        name: "ANNUALE"
+    };
 }
 
-/* usage
-console.log(Abbonamento.Mensile); // Output: 20
-console.log(Abbonamento.Annuale); // Output: 220 */
+export default Abbonamento;

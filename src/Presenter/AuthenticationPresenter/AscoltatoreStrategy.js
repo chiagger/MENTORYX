@@ -27,6 +27,10 @@ export default class AscoltatoreStrategy extends UserStrategy {
             })
     }
 
+    inserisciAbbonamento(uid, utente) {
+        throw new Error("C'è stato un errore di categoria");
+    }
+
     inserisciTitoloStudio(uid, utente) {
         const utenteJSON = JSON.stringify(utente);
         update(ref(db, "Users/" + uid), {

@@ -19,6 +19,10 @@ export default class UserService {
         this.strategy.inserisciMetodoPagamento(uid, utente);
     }
 
+    inserisciAbbonamento(uid, utente) {
+        this.strategy.inserisciAbbonamento(uid, utente);
+    }
+
     //ok
     inserisciTitoloStudio(uid, utente) {
         this.strategy.inserisciTitoloStudio(uid, utente);

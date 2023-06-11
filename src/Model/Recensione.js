@@ -1,10 +1,17 @@
+import Studente from './Studente'
+import User from './User';
+
 export default class Recensione {
     constructor(daStudente, titolo, descrizione, rating) {
-        this.daStudente = daStudente;
+        this._daStudente = daStudente;
         this.titolo = titolo;
         this.descrizione = descrizione;
         this._rating = null;
         this.setRating(rating);
+    }
+
+    set daStudente(value) {
+        this._daStudente = value;
     }
 
     get daStudente() {
@@ -13,6 +20,10 @@ export default class Recensione {
 
     get titolo() {
         return this._titolo;
+    }
+
+    set titolo(value) {
+        this._titolo = value;
     }
 
 
@@ -26,6 +37,10 @@ export default class Recensione {
 
     get rating() {
         return this._rating;
+    }
+
+    set rating(value) {
+        this._rating = value;
     }
 
     // Helper method to validate and set the rating
