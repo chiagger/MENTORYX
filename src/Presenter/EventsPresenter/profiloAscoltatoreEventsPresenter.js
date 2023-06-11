@@ -70,6 +70,12 @@ function createAscoltatoreProfile(ascoltatore) {
     contattaBtn.id = "contattaBtn";
     contattaBtn.innerHTML = "Contatta";
 
+    contattaBtn.addEventListener("click", () => {
+        localStorage.setItem('ascoltatoreContattato', JSON.stringify(ascoltatore));
+        window.location.href = "chatListStudente.html";
+
+    })
+
     profileContainer.appendChild(contattaBtn);
 
     // Append the profile container to the emptyContainer div

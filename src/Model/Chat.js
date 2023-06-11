@@ -4,17 +4,30 @@ import { getDatabase, ref, push, set } from 'firebase/database';
 const db = getDatabase();
 
 export default class Chat {
-    constructor(sender, receiver) {
+    constructor(receiver, sender) {
         this.sender = sender;
         this.receiver = receiver;
         this.chatId = null;
         this.messages = [];
+
+        // Create the chat in the database
+        this.createChatInDatabase();
     }
 
     createChatInDatabase() {
         // Generate a new unique key for the chat
         const chatRef = push(ref(db, 'Chat'));
         this.chatId = chatRef.key;
+
+        // Create the initial chat data object
+        const chatData = {
+            sender: this.sender,
+            receiver: this.receiver,
+            messages: [],
+        };
+
+        // Set the chat data in the database
+        set(chatRef, chatData);
     }
 
     addMessageToDatabase(message) {
@@ -22,21 +35,18 @@ export default class Chat {
             throw new Error('Chat is not created in the database yet.');
         }
 
-        const chatRef = ref(db, `Chat/${this.chatId}`);
-        set(chatRef, {
-            sender: this.sender,
-            receiver: this.receiver,
-            messages: [...this.messages, message],
-        });
+        const chatRef = ref(db, `Chat/${this.chatId}/messages`);
+        push(chatRef, message);
     }
 
-    addMessage(message) {
+    addMessage(message, sender, receiver) {
         const newMessage = {
-            sender: message.sender,
-            receiver: message.receiver,
-            message: message.message,
-            timestamp: new Date(),
+            sender: sender,
+            receiver: receiver,
+            message: message,
+            timestamp: new Date().toISOString(),
         };
+
         this.messages.push(newMessage);
         this.addMessageToDatabase(newMessage);
     }
