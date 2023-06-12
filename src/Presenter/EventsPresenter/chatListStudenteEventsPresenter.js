@@ -1,58 +1,100 @@
 import { getAuth, signOut, getInstance } from "firebase/auth";
-import { getDatabase, set, get, update, remove, ref, child } from 'firebase/database';
+import { getDatabase, set, get, update, remove, ref, child, push } from 'firebase/database';
 import { app } from '../../Presenter/firebaseConfig';
 
 const auth = getAuth(app);
 const db = getDatabase();
 
-const studenteuid = JSON.parse(localStorage.getItem("currentUser")).uid;
-const studente = await getUtenteObject(studenteuid);
-const ascoltatore = localStorage.getItem('ascoltatoreContattato');
+import Chat from "../../Model/Chat";
 
-
-
-function getUtenteObject(uid) {
-    const myUserData = ref(db);
-    return get(child(myUserData, "Users/" + uid))
-        .then((snapshot) => {
-            const snapshotValue = snapshot.val();
-            const firstChildValue = Object.values(snapshotValue)[0];
-            const utente = JSON.parse(firstChildValue);
-            return utente;
-        })
-        .catch((error) => {
-            alert(error);
-            throw error; // Propagate the error further
-        });
-}
 
 
 
 export function activateChat(chatObj, studente, ascoltatore) {
-    console.log(chatObj);
-
     document.getElementById("send-button").addEventListener("click", sendMessage);
     document.getElementById("message-input").addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
-            sendMessage();
+            sendMessage(chatObj, studente, ascoltatore);
         }
     });
 
 }
 
 
-function sendMessage() {
+async function sendMessage(chatObj, studente, ascoltatore) {
+    await removeChatFromDatabase();
     var messageInput = document.getElementById("message-input");
     var message = messageInput.value.trim();
 
     if (message !== "") {
         appendMessage("student", message);
-        simulateProfessorReply();
+        var chat = await getChatFromDatabase(chatObj.receiver, chatObj.sender);
+        await insertMessageInChat(chat, message, studente, ascoltatore);
         messageInput.value = "";
         messageInput.focus();
         scrollToBottom();
     }
 }
+
+async function insertMessageInChat(chat, message, sender, receiver) {
+    try {
+        const messageId = push(ref(db, `Chat/${chat.chatId}/messages`)).key;
+
+        const messageData = {
+            message: message,
+            sender: sender,
+            receiver: receiver,
+            timestamp: new Date().toISOString(),
+        };
+
+        // Get a reference to the specific message in the database
+        const messageRef = ref(db, `Chat/${chat.chatId}/messages/${messageId}`);
+
+        // Set the message data in the database
+        await set(messageRef, messageData);
+
+        // Update the local chat object with the new message
+        chat.messages[messageId] = messageData;
+
+    } catch (error) {
+        console.error('Error inserting message:', error);
+    }
+}
+
+async function getChatFromDatabase(receiver, sender) {
+    // Get a reference to the 'Chat' node in the database
+    const chatsRef = ref(db, 'Chat/');
+
+    try {
+        // Retrieve the snapshot of all chats from the database
+        const snapshot = await get(chatsRef);
+
+        if (snapshot.exists()) {
+            const chats = snapshot.val();
+
+            // Iterate over each chat in the database
+            for (const chatId in chats) {
+                const chat = chats[chatId];
+
+                // Check if the chat's receiver and sender match the target receiver and sender
+                if (chat.receiver.email === receiver.email && chat.sender.email === sender.email) {
+                    // Create a new instance of the Chat class
+                    const chatInstance = new Chat(chat.receiver, chat.sender);
+                    chatInstance.chatId = chatId;
+                    chatInstance.messages = chat.messages;
+
+                    return chatInstance;
+                }
+            }
+        }
+
+        return null;
+    } catch (error) {
+        console.error('Error retrieving chat from the database:', error);
+        return null;
+    }
+}
+
 
 export function appendMessage(sender, message) {
     var chatLog = document.getElementById("chat-log");
@@ -73,20 +115,40 @@ export function appendMessage(sender, message) {
     scrollToBottom();
 }
 
-function simulateProfessorReply() {
-    var replies = [
-        "Ciao! Come posso aiutarti?",
-        "Mi dispiace, non ho le informazioni necessarie.",
-        "Hai provato a consultare il materiale di riferimento?",
-        "Sono disponibile per una riunione domani alle 14:00.",
-        "Per favore, inviami il tuo codice per poterti aiutare meglio."
-    ];
-    var randomReply = replies[Math.floor(Math.random() * replies.length)];
-    appendMessage("professor", randomReply);
-}
 
 function scrollToBottom() {
     var chatLog = document.getElementById("chat-log");
     chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+
+async function removeChatFromDatabase() {
+    // Get a reference to the 'Chat' node in the database
+    const chatsRef = ref(db, 'Chat/');
+
+    try {
+        // Retrieve the snapshot of all chats from the database
+        const snapshot = await get(chatsRef);
+
+        if (snapshot.exists()) {
+            const chats = snapshot.val();
+
+            // Iterate over each chat in the database
+            for (const chatId in chats) {
+                const chat = chats[chatId];
+
+                // Check if the chat's receiver and sender match the target receiver and sender
+                if (!chat.messages) {
+                    // Remove the chat from the database
+                    const chatToRemoveRef = child(chatsRef, chatId);
+                    await set(chatToRemoveRef, null);
+                    return;
+                }
+            }
+        }
+
+    } catch (error) {
+        console.error('Error removing chat from the database:', error);
+    }
 }
 

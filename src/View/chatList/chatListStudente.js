@@ -8,6 +8,7 @@ const auth = getAuth(app);
 // Get the Firebase Realtime Database instance
 const db = getDatabase();
 
+
 const head = document.querySelector("head");
 const cssLink = document.createElement('link');
 cssLink.rel = 'stylesheet';
@@ -15,11 +16,14 @@ cssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/a
 head.appendChild(cssLink);
 
 
-window.onload = () => {
+window.onload = async () => {
+    await removeChatFromDatabase();
+
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) {
         notSignedIn();
     }
+
 }
 
 function notSignedIn() {
@@ -101,7 +105,10 @@ async function openChat(chatObj, studente, ascoltatore) {
 
     const messagesArray = await allMessagesArrayFrom(chatObj);
 
+    activateChat(chatObj, studente, ascoltatore);
+
     displayMessages(messagesArray, studente);
+
 
 }
 
@@ -149,12 +156,18 @@ const studenteuid = JSON.parse(localStorage.getItem("currentUser")).uid;
 const studente = await getUtenteObject(studenteuid);
 const ascoltatore = JSON.parse(localStorage.getItem('ascoltatoreContattato'));
 
-
+/*
+var chat1 = new Chat(studente, ascoltatore);
+chat1.addMessage("ciao", studente, ascoltatore);
+chat1.addMessage("anche a te", ascoltatore, studente);
+*/
 
 getChatswithUser(studente);
 
 
-function getChatswithUser(studente) {
+async function getChatswithUser(studente) {
+    await removeChatFromDatabase();
+
     const chatsRef = ref(db, 'Chat/');
     const userChats = [];
 
@@ -163,21 +176,25 @@ function getChatswithUser(studente) {
         if (snapshot.exists()) {
             const chats = snapshot.val();
             // Iterate over each chat
-            Object.keys(chats).forEach((chatId) => {
+            Object.keys(chats).forEach(async (chatId) => {
                 const chat = chats[chatId];
+
 
                 // Check if the user is a participant in the chat
                 if (chat.sender.email === studente.email || chat.receiver.email === studente.email) {
                     // Add the chat to the user's chats array
+
+
+
+
                     userChats.push(chat);
                 }
             });
 
-            // Once all chats are processed, display the list of chats
+            // Once all chats are processed, display the list of chatschatData
             displayChats(userChats);
         } else {
             // Handle case when no chats exist
-            console.log('No chats found');
         }
     }).catch((error) => {
         // Handle any errors
@@ -196,8 +213,7 @@ function displayChats(chats) {
 
     listContainer.appendChild(yourChats);
 
-    chats.forEach((chat) => {
-
+    chats.forEach(async (chat) => {
         const ascoltatore = (chat.sender.email !== studente.email) ? chat.sender : chat.receiver;
         const chatElement = document.createElement("div");
         chatElement.classList.add("chatElement");
@@ -220,10 +236,42 @@ function displayChats(chats) {
         chatElement.addEventListener("click", () => {
             openChat(chat, studente, ascoltatore);
         })
+
     })
 
     emptyContainer.appendChild(listContainer);
 
+}
+
+
+async function removeChatFromDatabase() {
+    // Get a reference to the 'Chat' node in the database
+    const chatsRef = ref(db, 'Chat/');
+
+    try {
+        // Retrieve the snapshot of all chats from the database
+        const snapshot = await get(chatsRef);
+
+        if (snapshot.exists()) {
+            const chats = snapshot.val();
+
+            // Iterate over each chat in the database
+            for (const chatId in chats) {
+                const chat = chats[chatId];
+
+                // Check if the chat's receiver and sender match the target receiver and sender
+                if (!chat.messages) {
+                    // Remove the chat from the database
+                    const chatToRemoveRef = child(chatsRef, chatId);
+                    await set(chatToRemoveRef, null);
+                    return;
+                }
+            }
+        }
+
+    } catch (error) {
+        console.error('Error removing chat from the database:', error);
+    }
 }
 
 

@@ -10,8 +10,9 @@ export default class Chat {
         this.chatId = null;
         this.messages = [];
 
-        // Create the chat in the database
         this.createChatInDatabase();
+
+
     }
 
     createChatInDatabase() {
@@ -23,7 +24,7 @@ export default class Chat {
         const chatData = {
             sender: this.sender,
             receiver: this.receiver,
-            messages: [],
+            messages: this.messages,
         };
 
         // Set the chat data in the database

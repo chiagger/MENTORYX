@@ -5,17 +5,8 @@ const auth = getAuth(app);
 const db = getDatabase(app);
 import Recensione from '../../Model/Recensione';
 const ascoltatore = JSON.parse(localStorage.getItem('selectedAscoltatore'));
+import Chat from "../../Model/Chat.js";
 
-
-const studenteuid = JSON.parse(localStorage.getItem("currentUser")).uid;
-const studente = await getUtenteObject(studenteuid);
-
-console.log(studente);
-const recensione1 = new Recensione(studente, "La svolta!", "Mira è davvero brava", 5);
-const recensione2 = new Recensione(studente, "Meh..", "Potrebbe essere meglio", 2);
-
-ascoltatore._recensioniList.push(recensione1);
-ascoltatore._recensioniList.push(recensione2);
 
 createAscoltatoreProfile(ascoltatore);
 
@@ -70,7 +61,13 @@ function createAscoltatoreProfile(ascoltatore) {
     contattaBtn.id = "contattaBtn";
     contattaBtn.innerHTML = "Contatta";
 
-    contattaBtn.addEventListener("click", () => {
+    contattaBtn.addEventListener("click", async () => {
+        const studenteuid = JSON.parse(localStorage.getItem("currentUser")).uid;
+        const studente = await getUtenteObject(studenteuid);
+        console.log(studente);
+        console.log(ascoltatore);
+        var chat = new Chat(ascoltatore, studente); //gets removed bc no messages
+        chat.addMessage("Ciao!", studente, ascoltatore);
         localStorage.setItem('ascoltatoreContattato', JSON.stringify(ascoltatore));
         window.location.href = "chatListStudente.html";
 
