@@ -41,6 +41,7 @@ module.exports = {
     chatListStudenteEventsPresenter: './src/Presenter/EventsPresenter/chatListStudenteEventsPresenter.js',
     chatListAscoltatore: './src/View/chatList/chatListAscoltatore.js',
     chatListAscoltatoreEventsPresenter: './src/Presenter/EventsPresenter/chatListAscoltatoreEventsPresenter.js',
+    saldoAscoltatore: './src/View/saldoAscoltatore/saldoAscoltatore.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -107,6 +108,11 @@ module.exports = {
       filename: 'chatListAscoltatore.html',
       title: 'Chat',
       chunks: ['chatListAscoltatore', 'chatListAscoltatoreEventsPresenter'],
+    }),
+    new HtmlWebpackPlugin({
+      title: 'MENTORYX',
+      filename: 'saldoAscoltatore.html',
+      chunks: ['saldoAscoltatore', 'commonEvents', 'ascoltatoreEventsPresenter'],
     }),
   ],
   output: {

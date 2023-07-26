@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Nunito:wght@300&display=swap');
+
+body {
+    font-family: 'Inter';
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    background-color: #ffffff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    width: 200px;
+}
+
+#navigation {
+    position: relative;
+}
+
+#profile-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#profile-image {
+    height: 30px;
+    width: auto;
+    margin-right: 20px;
+}
+
+#profile-dropdown {
+    position: absolute;
+    width: 130px;
+    top: 100%;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: none;
+}
+
+#profile-dropdown a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    padding: 5px;
+}
+
+#profile-dropdown a:hover {
+    background-color: #ececec;
+}
+
+/* Styling for the new tabs */
+#tabs-container {
+    display: flex;
+}
+
+.tab {
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+}
+
+.tab:hover {
+    background-color: #f4f4f4;
+}
+
+#empty-container {
+    margin-top: 20px;
+}
+
+/* Styling for the Log Eventi tab */
+#log-eventi {
+    background-color: #ffffff;
+    padding: 20px;
+    display: none;
+}
+
+/* Styling for the Log Accessi tab */
+#log-accessi {
+    background-color: #ffffff;
+    padding: 20px;
+    display: none;
+}
+
+/* Styling for the Assegna Materie tab */
+#assegna-materie {
+    background-color: #ffffff;
+    padding: 20px;
+    display: none;
+}
+
+/* Additional styles for the rest of the page */
+
+#content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 100px;
+}
+
+#image-container {
+    flex: 1;
+    max-width: 500px;
+    margin-right: 50px;
+    text-align: center;
+    position: relative;
+}
+
+#main-image {
+    max-width: 400px;
+    border-radius: 1%;
+    animation: slideDown 1s ease-out;
+    transition: transform 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+#main-image:hover {
+    transform: scale(1.1);
+}
+
+#description {
+    max-width: 500px;
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#description h1 {
+    font-size: 36px;
+    font-weight: 200;
+}
+
+#description p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+#search-form {
+    display: flex;
+    align-items: center;
+}
+
+#search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    margin-right: 10px;
+    width: 300px;
+}
+
+#search-input:focus {
+    outline-color: #0353e9;
+}
+
+#search-form button {
+    background-color: #0353e9;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 1px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#search-form button:hover {
+    background-color: #0139a1;
+}
+
+#logobig {
+    height: 120px;
+    width: auto;
+    margin-top: -30px;
+}

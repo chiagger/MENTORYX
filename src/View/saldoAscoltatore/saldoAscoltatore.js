@@ -1,4 +1,4 @@
-import "./homeAscoltatore.css";
+import "./saldoAscoltatore.css";
 
 const head = document.querySelector("head");
 const cssLink = document.createElement('link');
@@ -110,38 +110,9 @@ header.appendChild(navigation);
 const content = document.createElement('div');
 content.id = 'content';
 
-// Create image container element
-const imageContainer = document.createElement('div');
-imageContainer.id = 'image-container';
 
-// Create main image element
-const mainImage = document.createElement('img');
-mainImage.id = 'main-image';
-mainImage.src = 'https://i.postimg.cc/Ss8jwLSX/pexels-photo-5905483.webp';
-mainImage.alt = 'Immagine Principale';
+// Append  to content
 
-// Append main image to image container
-imageContainer.appendChild(mainImage);
-
-// Create description element
-const description = document.createElement('div');
-description.id = 'description';
-
-// Create heading element
-const heading = document.createElement('h1');
-heading.innerHTML = 'Benvenuto su <img id="logobig" src="https://i.imgur.com/UTazMbC.png">';
-
-// Create paragraph element
-const paragraph = document.createElement('p');
-paragraph.textContent = 'Sei diplomato? Laureato? Sai metterti alla prova? Sei sulla buona strada per diventare ascoltatore di MENTORYX, scopri il potere di aiutare gli studenti a superare le sfide e raggiungere i loro obiettivi!';
-
-// Append heading and paragraph to description
-description.appendChild(heading);
-description.appendChild(paragraph);
-
-// Append image container and description to content
-content.appendChild(imageContainer);
-content.appendChild(description);
 
 // Append header and content to the document body
 document.body.appendChild(header);

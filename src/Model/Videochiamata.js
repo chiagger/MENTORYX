@@ -1,16 +1,7 @@
 export default class Videochiamata {
-    constructor(chat, participants = [], duration = 0) {
+    constructor(chat, duration = 0) {
         this.setChat(chat);
-        this.participants = participants;
         this.duration = duration;
-    }
-
-    addParticipant(participant) {
-        if (participant instanceof User) {
-            this.participants.push(participant);
-        } else {
-            throw new Error("Invalid User");
-        }
     }
 
     endCall(duration) {
@@ -27,10 +18,6 @@ export default class Videochiamata {
 
     getChat() {
         return this.chat;
-    }
-
-    getParticipants() {
-        return this.participants;
     }
 
     getDuration() {
