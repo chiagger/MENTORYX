@@ -102,8 +102,8 @@ function calculateAverageRating(recensioniList) {
 
     let totalRating = 0;
     for (let i = 0; i < recensioniList.length; i++) {
-        const recensione = recensioniList[i];
-        const rating = recensione.rating;
+        const recensione = recensioniList.at(i);
+        const rating = recensione._rating;
         totalRating += rating;
     }
 

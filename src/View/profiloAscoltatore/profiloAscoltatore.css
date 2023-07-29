@@ -280,6 +280,15 @@ ul {
 }
 
 .recensioniList {
+    height: 300px;
+    /* Adjust the height to your desired value */
+
+    /* Add a border and padding to better visualize the div */
+    border: 1px solid #ccc;
+    padding: 10px;
+
+    /* Apply the overflow property to make it scrollable */
+    overflow: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;

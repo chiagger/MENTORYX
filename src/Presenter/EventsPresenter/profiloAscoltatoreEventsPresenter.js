@@ -1,5 +1,5 @@
 import { getAuth, signOut } from "firebase/auth";
-import { getDatabase, get, update, ref, child, onValue } from 'firebase/database';
+import { getDatabase, get, update, ref, child, onValue, query, equalTo } from 'firebase/database';
 import { app } from '../firebaseConfig.js';
 const auth = getAuth(app);
 const db = getDatabase(app);
@@ -52,6 +52,7 @@ function createAscoltatoreProfile(ascoltatore) {
     recensioniList.classList.add("recensioniList");
 
 
+
     for (const recensione of ascoltatore._recensioniList) {
         createRecensioneDiv(recensione, recensioniList);
     }
@@ -94,18 +95,21 @@ function createAscoltatoreProfile(ascoltatore) {
     emptyContainer.appendChild(profileContainer);
 }
 
+
+
 function createRecensioneDiv(recensione, recensioniList) {
     const recDiv = document.createElement("div");
     recDiv.classList.add("recDiv");
 
     const title = document.createElement("div");
-    title.innerHTML = recensione._daStudente.firstName + " dice: ";
+    title.innerHTML = JSON.parse(recensione._daStudente).firstName + " dice: ";
 
     const rating = document.createElement("div");
     rating.innerHTML = recensione._rating + "/5";
 
     const desc = document.createElement("div");
-    desc.innerHTML = recensione.descrizione;
+    console.log(recensione);
+    desc.innerHTML = recensione._descrizione;
 
     recDiv.appendChild(title);
     recDiv.appendChild(rating);
@@ -122,8 +126,8 @@ function calculateAverageRating(recensioniList) {
 
     let totalRating = 0;
     for (let i = 0; i < recensioniList.length; i++) {
-        const recensione = recensioniList[i];
-        const rating = recensione.rating;
+        const recensione = recensioniList.at(i);
+        const rating = recensione._rating;
         totalRating += rating;
     }
 

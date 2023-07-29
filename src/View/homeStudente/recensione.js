@@ -239,26 +239,3 @@ createAndAppend(descriptionDiv, 'textarea', { id: 'description', rows: '4', requ
 // Create the submit button
 createAndAppend(form, 'div', {}).innerHTML = '<button type="submit">Submit Review</button>';
 
-// Function to handle form submission
-function submitReview(event) {
-    event.preventDefault();
-    const title = document.getElementById('title').value;
-    const rating = document.getElementById('rating').value;
-    const description = document.getElementById('description').value;
-
-    // Perform validation if needed (e.g., check if fields are not empty)
-
-    // You can perform further processing here, like sending the data to a server for storage
-
-    // For this example, we'll just display the review data in the console
-    console.log('Review submitted:');
-    console.log('Title:', title);
-    console.log('Rating:', rating);
-    console.log('Description:', description);
-
-    // Clear form fields after submission
-    form.reset();
-}
-
-// Attach the submitReview function to the form's submit event
-form.addEventListener('submit', submitReview);

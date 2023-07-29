@@ -2,8 +2,9 @@ import Studente from './Studente'
 import User from './User';
 
 export default class Recensione {
-    constructor(daStudente, titolo, descrizione, rating) {
+    constructor(daStudente, aAscoltatore, titolo, descrizione, rating) {
         this._daStudente = daStudente;
+        this._aAscoltatore = aAscoltatore;
         this.titolo = titolo;
         this.descrizione = descrizione;
         this._rating = null;
@@ -16,6 +17,14 @@ export default class Recensione {
 
     get daStudente() {
         return this._daStudente;
+    }
+
+    set aAscoltatore(value) {
+        this.aAscoltatore = value;
+    }
+
+    get aAscoltatore() {
+        return this.aAscoltatore;
     }
 
     get titolo() {
