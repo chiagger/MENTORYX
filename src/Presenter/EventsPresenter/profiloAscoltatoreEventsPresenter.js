@@ -50,8 +50,8 @@ function createAscoltatoreProfile(ascoltatore) {
     // Create and append the list of recensioni
     const recensioniList = document.createElement('div');
     recensioniList.classList.add("recensioniList");
-
-
+    recensioniList.style.marginTop = '-300px';
+    recensioniList.style.visibility = "hidden";
 
     for (const recensione of ascoltatore._recensioniList) {
         createRecensioneDiv(recensione, recensioniList);
@@ -98,6 +98,9 @@ function createAscoltatoreProfile(ascoltatore) {
 
 
 function createRecensioneDiv(recensione, recensioniList) {
+    recensioniList.style.marginTop = '0px';
+    recensioniList.style.visibility = "visible";
+
     const recDiv = document.createElement("div");
     recDiv.classList.add("recDiv");
 
