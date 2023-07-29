@@ -1,4 +1,5 @@
-import "./saldoAscoltatore.css";
+import "./recensione.css";
+import "../../Presenter/EventsPresenter/commonEvents";
 
 const head = document.querySelector("head");
 const cssLink = document.createElement('link');
@@ -7,13 +8,20 @@ cssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/a
 head.appendChild(cssLink);
 
 
+
+
+
+
+
+
+
 window.onload = () => {
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) {
         notSignedIn();
     } else {
         const category = localStorage.getItem("currentUserCategory");
-        if (category !== "Ascoltatore") {
+        if (category !== "Studente") {
             notSignedInCorrectly();
         }
     }
@@ -94,7 +102,6 @@ walletLink.innerHTML = '<i class="fas fa-envelope"></i> Saldo';
 
 // Append child elements to their respective parents
 profileDropdown.appendChild(chatLink);
-profileDropdown.appendChild(walletLink);
 profileDropdown.appendChild(settingsLink);
 profileDropdown.appendChild(logoutLink);
 
@@ -111,13 +118,14 @@ const content = document.createElement('div');
 content.id = 'content';
 
 
+
+
 // Append  to content
 
 
 // Append header and content to the document body
 document.body.appendChild(header);
 document.body.appendChild(content);
-
 
 
 import { getAuth, signOut, getInstance } from "firebase/auth";
@@ -185,3 +193,72 @@ window.onload = function () {
         window.location.href = "impostazioni.html";
     });
 }
+
+
+
+// Function to create and append an HTML element
+function createAndAppend(parent, elementType, attributes) {
+    const element = document.createElement(elementType);
+    for (const key in attributes) {
+        element.setAttribute(key, attributes[key]);
+    }
+    parent.appendChild(element);
+    return element;
+}
+
+// Create the review form container
+const reviewForm = createAndAppend(content, 'div', { id: 'review-form' });
+
+// Create the form element
+const form = createAndAppend(reviewForm, 'form', { id: 'review' });
+
+// Create the form heading
+createAndAppend(form, 'h2', {}).textContent = 'Scrivi una Recensione';
+
+// Create the title input field
+const titleDiv = createAndAppend(form, 'div', {});
+createAndAppend(titleDiv, 'label', { for: 'title' }).textContent = 'Titolo:';
+createAndAppend(titleDiv, 'input', { type: 'text', id: 'title', required: true });
+
+// Create the rating dropdown
+const ratingDiv = createAndAppend(form, 'div', {});
+createAndAppend(ratingDiv, 'label', { for: 'rating' }).textContent = 'Valutazione:';
+const ratingSelect = createAndAppend(ratingDiv, 'select', { id: 'rating', required: true });
+createAndAppend(ratingSelect, 'option', { value: '', disabled: true, selected: true }).textContent = 'Seleziona';
+createAndAppend(ratingSelect, 'option', { value: '5' }).textContent = '5 stelle';
+createAndAppend(ratingSelect, 'option', { value: '4' }).textContent = '4 stelle';
+createAndAppend(ratingSelect, 'option', { value: '3' }).textContent = '3 stelle';
+createAndAppend(ratingSelect, 'option', { value: '2' }).textContent = '2 stelle';
+createAndAppend(ratingSelect, 'option', { value: '1' }).textContent = '1 stelle';
+
+// Create the description textarea
+const descriptionDiv = createAndAppend(form, 'div', {});
+createAndAppend(descriptionDiv, 'label', { for: 'description' }).textContent = 'Descrizione:';
+createAndAppend(descriptionDiv, 'textarea', { id: 'description', rows: '4', required: true });
+
+// Create the submit button
+createAndAppend(form, 'div', {}).innerHTML = '<button type="submit">Submit Review</button>';
+
+// Function to handle form submission
+function submitReview(event) {
+    event.preventDefault();
+    const title = document.getElementById('title').value;
+    const rating = document.getElementById('rating').value;
+    const description = document.getElementById('description').value;
+
+    // Perform validation if needed (e.g., check if fields are not empty)
+
+    // You can perform further processing here, like sending the data to a server for storage
+
+    // For this example, we'll just display the review data in the console
+    console.log('Review submitted:');
+    console.log('Title:', title);
+    console.log('Rating:', rating);
+    console.log('Description:', description);
+
+    // Clear form fields after submission
+    form.reset();
+}
+
+// Attach the submitReview function to the form's submit event
+form.addEventListener('submit', submitReview);

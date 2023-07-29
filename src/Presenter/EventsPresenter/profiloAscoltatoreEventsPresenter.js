@@ -61,6 +61,10 @@ function createAscoltatoreProfile(ascoltatore) {
     contattaBtn.id = "contattaBtn";
     contattaBtn.innerHTML = "Contatta";
 
+    const recensioneBtn = document.createElement("button");
+    recensioneBtn.id = "recensioneBtn";
+    recensioneBtn.innerHTML = "Scrivi Recensione";
+
     contattaBtn.addEventListener("click", async () => {
         const studenteuid = JSON.parse(localStorage.getItem("currentUser")).uid;
         const studente = await getUtenteObject(studenteuid);
@@ -73,7 +77,17 @@ function createAscoltatoreProfile(ascoltatore) {
 
     })
 
+    recensioneBtn.addEventListener("click", async () => {
+        localStorage.setItem('ascoltatoreContattato', JSON.stringify(ascoltatore));
+        const studenteuid = JSON.parse(localStorage.getItem("currentUser")).uid;
+        const studente = await getUtenteObject(studenteuid);
+        localStorage.setItem('studenteContattante', JSON.stringify(studente));
+        window.location.href = "recensione.html";
+
+    });
+
     profileContainer.appendChild(contattaBtn);
+    profileContainer.appendChild(recensioneBtn);
 
     // Append the profile container to the emptyContainer div
     const emptyContainer = document.querySelector('#emptyContainer');
