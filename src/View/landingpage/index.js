@@ -26,8 +26,10 @@ function header() {
   const li1 = document.createElement('li');
   const li2 = document.createElement('li');
   const li3 = document.createElement('li');
-  li1.setAttribute('id', 'homeBtn');
-  li1.innerHTML = "Home";
+  const homeBtn = document.createElement('button');
+  homeBtn.setAttribute('id', 'homeBtn');
+  homeBtn.innerHTML = 'Home';
+  li1.appendChild(homeBtn);
   li2.innerHTML = "Chi Siamo";
   li2.setAttribute('id', 'chisiamoBtn');
   li3.innerHTML = "Contatti";
@@ -89,7 +91,7 @@ function innerContainer() {
   left.appendChild(bottom);
 
   const img = document.createElement('img');
-  img.src = "https://images.unsplash.com/photo-1593698054469-2bb6fdf4b512?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80";
+  img.src = "landing.jpg";
 
   right.appendChild(img);
 
@@ -196,6 +198,8 @@ document.body.appendChild(container);
 
 const chisiamopage = document.querySelector(".chisiamopage");
 const contattacipage = document.querySelector(".contattacipage");
+
+
 
 window.onload = function () {
   chisiamopage.style.visibility = "hidden";

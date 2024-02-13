@@ -34,6 +34,7 @@
 }
 
 .landingpage {
+  margin-top: 500px;
   width: 100%;
   height: auto;
   display: flex;
@@ -69,7 +70,6 @@
 
 img {
   max-width: 420px;
-  margin-right: 4rem;
   height: auto;
 }
 
